@@ -9,7 +9,7 @@ public class LeapYear {
      * @source CS 61BL Lab 1
      */
     public static boolean isLeapYear(int year) {
-        if (year % 40 == 0 || (year % 40 == 0 && year % 100 != 0)) {
+        if (year % 400 == 0 || (year % 4 == 0 && year % 100 != 0)) {
             return true;
         }
         else {
