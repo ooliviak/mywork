@@ -20,7 +20,11 @@ public class ArrayOperations {
         if (pos < 0 || pos >= values.length) {
             return;
         }
-        // TODO: YOUR CODE HERE
+        values[pos] = newInt;
+//        for (pos = 0; pos < values.length; pos += 1) {
+//            if pos ==
+//            values[pos] = values
+//        }
     }
 
     /** 
