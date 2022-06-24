@@ -6,7 +6,7 @@ public class TriangleDrawer2 {
 
         for (row = 0; row < SIZE; row = row + 1) {
             for (col = 0; col <= row; col = col + 1) {
-                System.out.println('*');
+                System.out.print('*');
             }
             System.out.println();
             }
