@@ -11,15 +11,9 @@ public class ArrayOperations {
         // TODO: YOUR CODE HERE
 
         for (int i = pos; i < values.length - 1; i++) {
-            values[i] = values[i+1]
-            if (i == (values.length-2)) {
-                values[i] = 0;
-            } else {
-
-            }
+            values[i] = values[i+1];
         }
-
-
+        values[values.length-1] = 0;
     }
 
     /**
@@ -48,7 +42,12 @@ public class ArrayOperations {
     public static int[] catenate(int[] A, int[] B) {
         // TODO: YOUR CODE HERE
         int[] newlist = new int[A.length + B.length];
-
+        for (int i = 0; i < A.length; i++) {
+            newlist[i] = A[i];
+        }
+        for (int i = 0; i < B.length; i++) {
+            newlist[A.length + i] = B[i];
+        }
         return null;
     }
 
