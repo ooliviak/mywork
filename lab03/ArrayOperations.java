@@ -26,10 +26,13 @@ public class ArrayOperations {
             return;
         }
 
-        for (int index = values.length - 1; index > values.length; index -= 1) {
-            values[index] = values[index-1];
+        int x = newInt;
+        for (int index = pos; index < values.length; index++) {
+            int temp = x;
+            x = values[index];
+            values[index] = temp;
         }
-        values[pos] = newInt;
+
     }
 
     /** 
