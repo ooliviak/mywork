@@ -16,9 +16,7 @@ public class AddingMachine {
         // TODO Add code anywhere below to complete AddingMachine
 		while (true) {
 			input = scanner.nextInt();
-//			for (index = 0; index < MAXIMUM_NUMBER_OF_INPUTS; index++) {
-//				listOfInputs[index] = input;
-//			}
+
 			listOfInputs[index] = input;
 			index ++;
 			if (input == 0) {
