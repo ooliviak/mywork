@@ -42,13 +42,18 @@ public class ArrayOperations {
     public static int[] catenate(int[] A, int[] B) {
         // TODO: YOUR CODE HERE
         int[] newlist = new int[A.length + B.length];
+        int pos = 0;
+
         for (int i = 0; i < A.length; i++) {
-            newlist[i] = A[i];
+            newlist[pos] = A[i];
+            pos += 1;
         }
         for (int i = 0; i < B.length; i++) {
-            newlist[A.length + i] = B[i];
+            newlist[pos] = B[i];
+            pos += 1;
         }
-        return null;
+        return newlist;
+//        return null;
     }
 
 }
