@@ -128,7 +128,7 @@ public class Measurement {
     @Override
     public String toString() {
 //        return ""; // provided to allow the file to compile
-        return this.feet + " ' " +  this.inches + " ";
+        return this.feet + "\'" +  this.inches + "\"";
     }
 
 }
