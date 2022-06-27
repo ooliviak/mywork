@@ -56,7 +56,7 @@ public class MeasurementTest {
 //      13ft 6in
         assertEquals(6, m1.getInches());
         assertEquals(13, m1.getFeet());
-
+        System.out.println(m1.toString());
     }
 
 }
