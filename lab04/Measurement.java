@@ -87,6 +87,7 @@ public class Measurement {
             this.inches = y - 12;
             y = this.inches;
         }
+        this.inches = y;
 
         Measurement minusMeasure = new Measurement(this.feet, this.inches);
         return minusMeasure; // provided to allow the file to compile
@@ -107,6 +108,7 @@ public class Measurement {
         int tempinch = 0;
         tempinch = this.feet * 12 + this.inches;
         this.inches = multipleAmount * tempinch;
+        this.feet = 0;
         for (int i = 0; this.inches >= 12; i++) {
             this.feet ++;
             this.inches = this.inches - 12;
