@@ -60,7 +60,6 @@ public class IntList {
         else {
             throw new IllegalArgumentException("YOUR MESSAGE HERE");
         }
-        //TODO: YOUR CODE HERE
 
     }
 
@@ -71,8 +70,14 @@ public class IntList {
      * @return The String representation of the list.
      */
     public String toString() {
-        //TODO: YOUR CODE HERE
-        return null;
+        if (this.next == null) {
+            return String.valueOf(this.item);
+        } else {
+            return this.item + " " + this.next.toString();
+
+        }
+//        return null;
+
     }
 
     /**
@@ -95,6 +100,7 @@ public class IntList {
         IntList otherLst = (IntList) obj;
 
         //TODO: YOUR CODE HERE
+//        if (otherLst.items )
 
         return false;
     }
@@ -106,6 +112,11 @@ public class IntList {
      */
     public void add(int value) {
         //TODO: YOUR CODE HERE
+        if (this.next != null) {
+            this.next.item = value;
+        } else {
+            this.next.add(value);
+        }
     }
 
     /**
@@ -115,7 +126,14 @@ public class IntList {
      */
     public int smallest() {
         //TODO: YOUR CODE HERE
-        return -1;
+        int minval = this.item;
+        for (int i = 0; i < 100; i++) {
+            if (minval > this.next.get(i)) {
+                minval = this.next.get(i);
+            }
+        }
+//        return -1;
+        return minval;
     }
 
     /**
@@ -125,6 +143,7 @@ public class IntList {
      */
     public int squaredSum() {
         //TODO: YOUR CODE HERE
+
         return -1;
     }
 
