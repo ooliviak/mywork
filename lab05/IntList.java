@@ -100,9 +100,14 @@ public class IntList {
         IntList otherLst = (IntList) obj;
 
         //TODO: YOUR CODE HERE
-//        if (otherLst.items )
+        if (this.next != null) {
+            return (this.item == otherLst.item)
+                    &&  (this.next.equals(otherLst.next));
+        } else {
+            return (this.item == otherLst.item);
+        }
 
-        return false;
+//        return false;
     }
 
     /**
