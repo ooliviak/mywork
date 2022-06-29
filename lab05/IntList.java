@@ -147,8 +147,12 @@ public class IntList {
      */
     public int squaredSum() {
         //TODO: YOUR CODE HERE
+        if (this.next == null) {
+            return this.item * this.item;
+        } else {
+            return (this.item * this.item) + this.next.squaredSum();
+        }
 
-        return -1;
     }
 
     /**
@@ -206,7 +210,14 @@ public class IntList {
      */
     public static IntList dcatenate(IntList A, IntList B) {
         //TODO: YOUR CODE HERE
-        return null;
+        IntList templist = A;
+        while (templist.next != null) {
+            templist = templist.next;
+        }
+        templist.next = B;
+        return A;
+
+//        return null;
     }
 
     /**
@@ -219,6 +230,16 @@ public class IntList {
      */
      public static IntList catenate(IntList A, IntList B) {
         //TODO: YOUR CODE HERE
-        return null;
+         IntList newlist = new IntList(A.item, null);
+         IntList templist = A;
+         IntList temp2 = newlist;
+
+         while (templist.next != null) {
+             templist = templist.next;
+             temp2.next = new IntList(templist.item,null);
+             temp2 = temp2.next;
+         }
+         temp2.next = B;
+         return newlist;
      }
 }
