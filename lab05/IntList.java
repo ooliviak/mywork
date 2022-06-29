@@ -97,6 +97,7 @@ public class IntList {
         if (obj == null || !(obj instanceof IntList)) {
             return false;
         }
+
         IntList otherLst = (IntList) obj;
 
         //TODO: YOUR CODE HERE
@@ -117,8 +118,8 @@ public class IntList {
      */
     public void add(int value) {
         //TODO: YOUR CODE HERE
-        if (this.next != null) {
-            this.next.item = value;
+        if (this.next == null) {
+            this.next = new IntList(value);
         } else {
             this.next.add(value);
         }
@@ -131,14 +132,12 @@ public class IntList {
      */
     public int smallest() {
         //TODO: YOUR CODE HERE
-        int minval = this.item;
-        for (int i = 0; i < 100; i++) {
-            if (minval > this.next.get(i)) {
-                minval = this.next.get(i);
-            }
+        if (this.next != null) {
+            return Math.min(this.item, this.next.smallest());
+        } else {
+            return this.item;
         }
-//        return -1;
-        return minval;
+
     }
 
     /**
