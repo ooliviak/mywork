@@ -98,7 +98,7 @@ public class LinkedListDequeTest {
      */
     @Test
     public void size() {
-        String x = lld.printDeque();
+
 
     }
 
