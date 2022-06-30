@@ -5,5 +5,6 @@ package deque;
 * Deque is a doubly-ended queue, that allows you to quickly add
 * and remove items from the front and back. */
 public interface Deque<T> {
+    
 
 }
