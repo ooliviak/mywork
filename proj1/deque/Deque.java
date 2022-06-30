@@ -5,17 +5,17 @@ package deque;
 * Deque is a doubly-ended queue, that allows you to quickly add
 * and remove items from the front and back. */
 public interface Deque<T> {
-//    default boolean isEmpty() {
-////        if (T.size() == 0) {
-////            return True;
-////        } else {
-////            return False;
-////        }
-//        return (T.size() == 0);
-//    }
+    default boolean isEmpty() {
+//        if (T.size() == 0) {
+//            return True;
+//        } else {
+//            return False;
+//        }
+        return (size() == 0);
+    }
     public void addFirst(T item);
     public void addLast(T item);
-    public boolean isEmpty();
+//    public boolean isEmpty();
     public int size();
     public void printDeque();
     public T removeFirst();
