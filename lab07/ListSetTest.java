@@ -19,6 +19,27 @@ public class ListSetTest {
         }
         assertTrue(aSet.isEmpty());
         assertEquals(0, aSet.size());
+
+
+        ListSet cSet = new ListSet();
+        cSet.add(3);
+        cSet.add(3);
+        cSet.add(3);
+        assertEquals(1, cSet.size());
+
+
+        ListSet abSet = new ListSet();
+        abSet.add(3);
+        abSet.add(4);
+        abSet.add(5);
+        abSet.add(10);
+        abSet.add(4);
+        abSet.remove(10);
+        int[] x;
+        x = abSet.toIntArray();
+        assertEquals(3, x.length);
+
+
     }
 
 }
