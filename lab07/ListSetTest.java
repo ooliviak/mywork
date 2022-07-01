@@ -27,6 +27,13 @@ public class ListSetTest {
         cSet.add(3);
         assertEquals(1, cSet.size());
 
+        ListSet dSet = new ListSet();
+        dSet.add(4);
+        dSet.add(3);
+        dSet.remove(3);
+        dSet.remove(3);
+        assertEquals(1, dSet.size());
+
 
         ListSet abSet = new ListSet();
         abSet.add(3);
@@ -39,6 +46,10 @@ public class ListSetTest {
         x = abSet.toIntArray();
         assertEquals(3, x.length);
 
+        ListSet abcSet = new ListSet();
+        int[] y;
+        y = abcSet.toIntArray();
+        assertEquals(0, y.length);
 
     }
 
