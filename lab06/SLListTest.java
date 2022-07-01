@@ -29,17 +29,20 @@ public class SLListTest {
 
 //        general case  (size >= 2)
         SLList test1 = SLList.of(1, 3, 5, 6);
+        test1.reverse();
         assertEquals(6, test1.get(0));
         assertEquals(3, test1.get(2));
 
 
 //        base case 1   (size = 1)
         SLList test3 = new SLList(2);
+        test3.reverse();
         assertEquals(2, test3.get(0));
 
 
 //        base case 2   (size = 0)
         SLList test4 = new SLList();
+        test4.reverse();
         assertEquals(null, test4.get(0));
 
 
