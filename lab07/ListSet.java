@@ -7,20 +7,29 @@ import java.util.List;
 public class ListSet implements SimpleSet {
 
     List<Integer> elems;
-    private int size;
 
     public ListSet() {
         elems = new ArrayList<Integer>();
     }
 
+    int size;
+
     /** Adds k to the set. */
     public void add(int k) {
         size ++;
-        elems.add(k);
+        if (contains(k)) {
+            size --;
+        } else {
+            size ++;
+            elems.add(k);
+        }
+//        size = elems.size();
+
     }
 
     /** Removes k from the set. */
     public void remove(int k) {
+        size = elems.size();
         size -= 1;
         Integer toRemove = k;
         // TODO - use the above variable with an appropriate List method.
@@ -47,6 +56,7 @@ public class ListSet implements SimpleSet {
 
     /** Returns the number of items in the set. */
     public int size() {
+        size = elems.size();
         // TODO
         return size;
     }
