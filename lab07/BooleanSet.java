@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Represent a set of nonnegative ints from 0 to maxElement for some initially
@@ -45,15 +46,14 @@ public class BooleanSet implements SimpleSet {
 
     /** Returns an array containing all of the elements in this collection. */
     public int[] toIntArray() {
-        // TODO
-        int[] arr = new int[contains.length];
+        int[] arr = new int[size];
+        int j = 0;
         for (int i = 0; i < contains.length; i++) {
             if (contains[i]) {
-                arr[i] = i;
+                arr[j] = i;
+                j++;
             }
         }
         return arr;
-
-
     }
 }
