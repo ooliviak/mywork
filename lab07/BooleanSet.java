@@ -19,7 +19,12 @@ public class BooleanSet implements SimpleSet {
     /** Adds k to the set. */
     public void add(int k) {
         size ++;
-        contains[k] = true;
+        if (contains[k]) {
+            size --;
+        } else {
+            contains[k] = true;
+        }
+
     }
 
     /** Removes k from the set. */
