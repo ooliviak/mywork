@@ -21,6 +21,12 @@ public class BooleanSetTest {
         cbSet.add(3);
         assertEquals(1, cbSet.size());
 
+        BooleanSet cdSet = new BooleanSet(5);
+        cdSet.add(4);
+        cdSet.add(3);
+        cdSet.remove(3);
+        cdSet.remove(3);
+        assertEquals(1, cdSet.size());
 
         for (int i = 0; i < 100; i += 2) {
             aSet.add(i);
