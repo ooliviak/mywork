@@ -7,6 +7,11 @@ public class BooleanSetTest {
     public void testBasics() {
         BooleanSet aSet = new BooleanSet(100);
         assertEquals(0, aSet.size());
+//        aSet.add(3);
+//        assertTrue(aSet.contains(3));
+//        aSet.remove(3);
+//        assertFalse(aSet.contains(3));
+
         for (int i = 0; i < 100; i += 2) {
             aSet.add(i);
             assertTrue(aSet.contains(i));
