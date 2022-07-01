@@ -143,7 +143,28 @@ public class SLList {
     }
 
     /** Destructively reverses this list. */
+//    public void reverseHelper() {
+//
+//    }
     public void reverse() {
-        // TODO
+        IntListNode p = sentinel;
+        IntListNode temp;
+        temp = reverseHelper(p.next);
+        p.next = temp;
+
+    }
+
+    private IntListNode reverseHelper(IntListNode p) {
+        IntListNode temp2;
+        if (p.next == sentinel) {
+            return p;
+        } else {
+            temp2 = reverseHelper(p.next);
+            p.next.next = p;
+            temp2.next.next = p.next.next;
+            return temp2;
+        }
+
+
     }
 }
