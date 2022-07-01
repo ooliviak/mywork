@@ -120,18 +120,17 @@ public class SLList {
 
     /** Adds x to the list at the specified index. */
     public void add(int index, int x) {
-        size ++;
         IntListNode p = sentinel;
+        size ++;
+        int i = 0;
         if (index >= size) {
-            size++;
-            while (p.next != null) {
-                p = p.next;
+            while (p.next != sentinel) {
+                 p = p.next;
             }
-            p.next = new IntListNode(x, null);
-        } else if (size == 0) {
+            p.next = new IntListNode(x, p.next);
+        } else if (index == 0) {
             p.next = new IntListNode(x, p.next);
         } else {
-            int i = 0;
             while (i < index) {
                 i++;
                 p = p.next;
@@ -139,7 +138,6 @@ public class SLList {
                     p.next = new IntListNode(x, p.next);
                 }
             }
-
         }
 
     }
