@@ -29,8 +29,15 @@ public class BooleanSet implements SimpleSet {
 
     /** Removes k from the set. */
     public void remove(int k) {
-        size --;
-        contains[k] = false;
+        if (contains[k] == false) {
+            contains[k] = false;
+        } else {
+            size --;
+            contains[k] = false;
+        }
+
+//        size --;
+//        contains[k] = false;
     }
 
     /** Return true if k is in this set, false otherwise. */
