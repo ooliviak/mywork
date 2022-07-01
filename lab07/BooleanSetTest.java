@@ -16,6 +16,11 @@ public class BooleanSetTest {
         bSet.remove(10);
         bSet.toIntArray();
 
+        BooleanSet cbSet = new BooleanSet(5);
+        cbSet.add(3);
+        cbSet.add(3);
+        assertEquals(1, cbSet.size());
+
 
         for (int i = 0; i < 100; i += 2) {
             aSet.add(i);
