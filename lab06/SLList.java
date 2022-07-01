@@ -164,7 +164,8 @@ public class SLList {
             temp2.next.next = p.next.next;
             return temp2;
         }
-
-
+    }
+    private IntListNode reverseHelper() {
+        if (p.next == )
     }
 }
