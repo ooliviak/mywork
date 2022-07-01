@@ -64,6 +64,7 @@ public class ListSet implements SimpleSet {
     /** Returns an array containing all of the elements in this collection. */
     public int[] toIntArray() {
         // TODO - use a for loop!
+        size = elems.size();
         int[] arr = new int[size];
         for (int i = 0; i < size; i++) {
             arr[i] = elems.get(i);
