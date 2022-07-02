@@ -2,6 +2,9 @@ package deque;
 
 import org.junit.Test;
 
+import java.util.ArrayDeque;
+import java.util.Optional;
+
 import static org.junit.Assert.*;
 
 /* Performs some basic array deque tests. */
@@ -14,6 +17,149 @@ public class ArrayDequeTest {
      * you can define a new local variable. However, the autograder will
      * not grade that test. */
 
-    //public static Deque<Integer> ad = new ArrayDeque<Integer>();
+    public static Deque<Integer> ad = new ArrayDeque<Integer>();
+    @Test
+    /** Adds a few things to the list, checks that isEmpty() is correct.
+     * This is one simple test to remind you how junit tests work. You
+     * should write more tests of your own.
+     *
+     * && is the "and" operation. */
+    public void addIsEmptySizeTest() {
+        assertTrue("A newly initialized LLDeque should be empty", ad.isEmpty());
+        ad.addFirst(0);
+        ad.addFirst(3);
+        assertFalse("lld1 should now contain 1 item", ad.isEmpty());
+
+        ad = new ArrayDeque<Integer>(); //Assigns lld equal to a new, clean LinkedListDeque!
+
+        ad.addFirst(3);
+        ad.addFirst(1);
+        assertFalse("11d2 should now contain 2 items", ad.isEmpty());
+        ad = new LinkedListDeque<Integer>();
+        assertTrue("A newly initialized LLDeque should be empty", ad.isEmpty());
+
+
+    }
+
+    /** Adds an item, removes an item, and ensures that dll is empty afterwards. */
+    @Test
+    public void addRemoveTest() {
+        ad.addFirst(1);
+        ad.removeFirst();
+        assertTrue("lld should be empty", ad.isEmpty());
+
+        ad = new ArrayDeque<Integer>();
+        ad.addFirst(1);
+        ad.addFirst(2);
+        ad.removeFirst();
+        assertFalse(ad.isEmpty());
+
+        ad = new ArrayDeque<Integer>();
+        ad.addFirst(1);
+        ad.addFirst(2);
+        ad.removeFirst();
+        ad.removeFirst();
+        assertTrue(ad.isEmpty());
+
+        ad.addLast(1);
+        ad.removeLast();
+        assertTrue("lld should be empty", ad.isEmpty());
+
+        ad = new ArrayDeque<Integer>();
+        ad.addFirst(1);
+        ad.addFirst(2);
+        ad.removeFirst();
+        int y = ad.get(0);
+        assertEquals(1, y);
+
+//        this won't work
+//        lld = new ArrayDeque<Integer>();
+//        lld.addFirst(1);
+//        lld.addFirst(2);
+//        lld.removeLast();
+//        int y = lld.get(0);
+//        assertEquals(2, y);
+
+    }
+    /** Make sure that removing from an empty LinkedListDeque does nothing */
+    @Test
+    public void removeEmptyTest() {
+        ad = new ArrayDeque<Integer>();
+        ad.removeFirst();
+        assertTrue(ad.isEmpty());
+
+
+    }
+    /** Make sure your LinkedListDeque also works on non-Integer types */
+    @Test
+    public void printDeque() {
+        ad = new ArrayDeque<Integer>();
+    }
+    @Test
+//    public static Deque<String> lld2 = new LinkedListDeque<String>();
+//    public static Deque<Double> lld3 = new LinkedListDeque<Integer>();
+
+    public void multipleParamsTest() {
+        Deque<String> ad2 = new ArrayDeque<Integer>();
+        ad2.addFirst("cat");
+        ad2.addFirst("dog");
+        ad2.addFirst("cow");
+        ad2.addLast("duck");
+        ad2.addLast("bear");
+        ad2.removeFirst();
+        assertFalse(ad2.isEmpty());
+        assertEquals(4, ad2.size());
+        String y = ad2.get(1);
+        assertEquals("cat", y);
+        String x = ad2.get(3);
+        assertEquals("bear", x);
+
+        Deque<Double> ad3 = new ArrayDeque<Integer>();
+        ad3.addFirst(1.0);
+        ad3.addFirst(2.0);
+        ad3.removeLast();
+        Double z = ad3.get(1);
+        assertEquals(null, z);
+        Double a = ad3.get(0);
+        assertEquals(Optional.of(2.0), a);
+
+//        assertTrue("lld should be empty", lld3.isEmpty());
+
+    }
+    /** Make sure that removing from an empty LinkedListDeque returns null */
+    @Test
+    public void emptyNullReturn() {
+        ad = new ArrayDeque<Integer>();
+        ad.removeFirst();
+        assertEquals(null, ad);
+//        assertNull("it should return null", lld);
+
+
+    }
+    /** TODO: Write tests to ensure that your implementation works for really large
+     * numbers of elements, and test any other methods you haven't yet tested!
+     */
+
+    @Test
+    public void get() {
+        ad = new ArrayDeque<Integer>();
+        ad.addFirst(1);
+        ad.addFirst(2);
+        ad.addLast(2);
+        ad.addLast(4);
+        ad.removeFirst();
+        assertEquals(3, ad.size());
+        assertEquals(null, ad.get(5));
+        assertEquals(null, ad.getRecursive(5));
+        int y = ad.get(1);
+        assertEquals(2, y);
+        ad.getRecursive(1);
+        int x = ad.getRecursive(1);
+        ad.getRecursive(2);
+        int z = ad.getRecursive(2);
+        assertEquals(4, z);
+//        assertEquals(4, lld.get(2));
+
+    }
 
 }
