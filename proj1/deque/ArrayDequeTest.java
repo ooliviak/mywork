@@ -17,7 +17,7 @@ public class ArrayDequeTest {
      * you can define a new local variable. However, the autograder will
      * not grade that test. */
 
-    public static Deque<Integer> ad = new ArrayDeque<Integer>();
+    public static ArrayDeque<Integer> ad = new ArrayDeque<Integer>();
     @Test
     /** Adds a few things to the list, checks that isEmpty() is correct.
      * This is one simple test to remind you how junit tests work. You
