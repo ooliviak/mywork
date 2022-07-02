@@ -12,11 +12,9 @@ public class ArrayDeque<T> implements Deque<T> {
     public ArrayDeque() {
         items = (T[]) new Object[8];
         size = 0;
-        capacity = items.length;
+
 
     }
-
-
     private void resize(int capacity) {
         T[] newarr = (T[]) new Object[capacity];
         System.arraycopy(items, 0, newarr, 0, size);
@@ -66,8 +64,5 @@ public class ArrayDeque<T> implements Deque<T> {
         return null;
     }
 
-    @Override
-    public T getRecursive(int i) {
-        return null;
-    }
+
 }
