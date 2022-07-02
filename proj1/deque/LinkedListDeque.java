@@ -2,70 +2,161 @@ package deque;
 
 public class LinkedListDeque<T> implements Deque<T> {
 
-    private class IntListNode {
-        public int item;
-        public IntListNode next;
-        public IntListNode prev;
-        public IntListNode(IntListNode prev, int item, IntListNode next) {
+    private class ListNode {
+        public T item;
+        public ListNode next;
+        public ListNode prev;
+        public ListNode(ListNode prev, T item, ListNode next) {
             this.prev = prev;
             this.item = item;
             this.next = next;
         }
     }
     /* The first item (if it exists) is at sentinel.next. */
-    private IntListNode sentinel;
+    private ListNode sentinel;
     private int size;
 
     /* empty list */
     public LinkedListDeque() {
-        sentinel = new IntListNode(null,7, null);
+//        sentinel = new ListNode(null,7, null);
+        sentinel = new ListNode(null, null, null);
+        sentinel.prev = sentinel;
         sentinel.next = sentinel;
         size = 0;
     }
 
-//    public LinkedListDeque(int x) {
-//        sentinel = new IntListNode(7, null);
-//        sentinel.next = new IntListNode(x, null);
-//        sentinel.next.next = sentinel;
-//        size = 1;
-//    }
-
+    public LinkedListDeque(T item) {
+        sentinel = new ListNode(null, null, null);
+        sentinel.next = new ListNode(sentinel, item, sentinel);
+        sentinel.next.next = sentinel;
+        sentinel.next.prev = sentinel;
+        size = 1;
+    }
     @Override
     public void addFirst(T item) {
-
+        size++;
+        sentinel.next = new ListNode(sentinel, item, sentinel.next);
+        /* prev should point the sentinel */
+        /* if addFirst happens second time,
+        * it would be sentinel -> item -> sentinel.next
+        * it would be sentinel -> sentinel.next -> sentinel.next.next*/
+        /* its prev should now point to new added one instead of sentinel*/
+        sentinel.next.next.prev = sentinel.next;
     }
 
     @Override
     public void addLast(T item) {
-
+        size += 1;
+        /* sentinel prev should point to newly added last item */
+        /* new last item next should point to sentinel */
+        /* before this function was called, sentinel prev was
+        pointing to the "last" item which now should become a prev item after this*/
+        sentinel.prev = new ListNode(sentinel.prev, item, sentinel);
+        /* need to connect prev and the last item
+        * bc only last item prev is pointing to prev and next is pointing
+        * to sentinel, last item prev's next isn't pointing to the last item*/
+        sentinel.prev.prev.next = sentinel.prev;
     }
 
     @Override
     public int size() {
-        return 0;
+        return size;
     }
 
     @Override
     public void printDeque() {
 
+
     }
 
     @Override
     public T removeFirst() {
-        return null;
+        /*  Removes and returns the item at the front of the deque. */
+        /* if an empty list */
+        if (sentinel.next == sentinel) {
+            return null;
+        } else if (size == 1) {
+            size -= 1;
+            sentinel.next = sentinel;
+            sentinel.prev = sentinel;
+            return null;
+        } else {
+            size -= 1;
+            /* sentinel.next.item gets removed */
+            ListNode p = sentinel.next;
+            /* item's prev after the first one should point to sentinel */
+            /* sentinel.next should point to second one */
+            sentinel.next.next.prev = sentinel;
+            sentinel.next = sentinel.next.next;
+            return p.item;
+        }
     }
 
     @Override
     public T removeLast() {
-        return null;
+        /*  Removes and returns the item at the back of the deque. */
+        /* if an empty list */
+        if (sentinel.next == sentinel) {
+            return null;
+        } else if (size == 1) {
+            size -= 1;
+            sentinel.next = sentinel;
+            sentinel.prev = sentinel;
+            return null;
+        } else {
+            size -= 1;
+            ListNode q = sentinel.prev;
+            /* the second last item's next should point to sentinel */
+            /* sentinel.prev always points to the second last one
+            * becuz last one gets removed */
+            sentinel.prev = sentinel.prev.prev;
+            sentinel.prev.prev.next = sentinel;
+            return q.item;
+        }
     }
 
     @Override
     public T get(int index) {
-        return null;
+        /* Gets the item at the given index, where 0 is the front,
+        1 is the next item, and so forth.
+        If no such item exists, returns null.
+        use iteration */
+        if (size == 0) {
+            return null;
+        } else if (size == 1) {
+            return sentinel.next.item;
+        } else if (index >= size) {
+            return null;
+        } else {
+            ListNode p = sentinel.next;
+            while (index > 0) {
+                p = p.next;
+                index -= 1;
+            }
+            return p.item;
+        }
     }
 
     public T getRecursive(int index) {
-        return null;
+        ListNode p = sentinel.next;
+        if (index >= size) {
+            return null;
+        } else if (index == 0) {
+            return p.item;
+        } else {
+            return getRecur(p, 0, index);
+        }
     }
+
+    /* recursive helper function */
+    private T getRecur(ListNode p, int i, int index) {
+        if (i == index) {
+            return p.item;
+        } else {
+            /* pass in p.next so we can get the next item */
+            return getRecur(p.next, i+1, index);
+        }
+    }
+
+
 }
