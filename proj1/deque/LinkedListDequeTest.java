@@ -1,6 +1,9 @@
 package deque;
 
 import org.junit.Test;
+
+import java.util.Optional;
+
 import static org.junit.Assert.*;
 
 
@@ -25,7 +28,7 @@ public class LinkedListDequeTest {
     public void addIsEmptySizeTest() {
 		assertTrue("A newly initialized LLDeque should be empty", lld.isEmpty());
 		lld.addFirst(0);
-
+        lld.addFirst(3);
         assertFalse("lld1 should now contain 1 item", lld.isEmpty());
 
         lld = new LinkedListDeque<Integer>(); //Assigns lld equal to a new, clean LinkedListDeque!
@@ -63,10 +66,26 @@ public class LinkedListDequeTest {
         lld.removeLast();
         assertTrue("lld should be empty", lld.isEmpty());
 
+        lld = new LinkedListDeque<Integer>();
+        lld.addFirst(1);
+        lld.addFirst(2);
+        lld.removeFirst();
+        int y = lld.get(0);
+        assertEquals(1, y);
+
+//        this won't work
+//        lld = new LinkedListDeque<Integer>();
+//        lld.addFirst(1);
+//        lld.addFirst(2);
+//        lld.removeLast();
+//        int y = lld.get(0);
+//        assertEquals(2, y);
+
     }
     /** Make sure that removing from an empty LinkedListDeque does nothing */
     @Test
     public void removeEmptyTest() {
+        lld = new LinkedListDeque<Integer>();
         lld.removeFirst();
         assertTrue(lld.isEmpty());
 
@@ -74,62 +93,75 @@ public class LinkedListDequeTest {
     }
     /** Make sure your LinkedListDeque also works on non-Integer types */
     @Test
+    public void printDeque() {
+        lld = new LinkedListDeque<Integer>();
+    }
+    @Test
+//    public static Deque<String> lld2 = new LinkedListDeque<String>();
+//    public static Deque<Double> lld3 = new LinkedListDeque<Integer>();
+
     public void multipleParamsTest() {
-        lld = new LinkedListDeque<String>();
-        lld.addFirst(1);
-        lld.removeFirst();
-        assertTrue("lld should be empty", lld.isEmpty());
-        lld = new LinkedListDeque<Double>();
-        lld.addFirst(1);
-        lld.removeFirst();
-        assertTrue("lld should be empty", lld.isEmpty());
+        Deque<String> lld2 = new LinkedListDeque<String>();
+        lld2.addFirst("cat");
+        lld2.addFirst("dog");
+        lld2.addFirst("cow");
+        lld2.addLast("duck");
+        lld2.addLast("bear");
+        lld2.removeFirst();
+        assertFalse(lld2.isEmpty());
+        assertEquals(4, lld2.size());
+        String y = lld2.get(1);
+        assertEquals("cat", y);
+        String x = lld2.get(3);
+        assertEquals("bear", x);
+
+        Deque<Double>  lld3 = new LinkedListDeque<Double>();
+        lld3.addFirst(1.0);
+        lld3.addFirst(2.0);
+        lld3.removeLast();
+        Double z = lld3.get(1);
+        assertEquals(null, z);
+        Double a = lld3.get(0);
+        assertEquals(Optional.of(2.0), a);
+
+//        assertTrue("lld should be empty", lld3.isEmpty());
 
     }
     /** Make sure that removing from an empty LinkedListDeque returns null */
     @Test
     public void emptyNullReturn() {
+        lld = new LinkedListDeque<Integer>();
         lld.removeFirst();
-        assertNull("it should return null", lld);
+        assertEquals(null, lld);
+//        assertNull("it should return null", lld);
 
 
     }
     /** TODO: Write tests to ensure that your implementation works for really large
      * numbers of elements, and test any other methods you haven't yet tested!
      */
-    @Test
-    public void size() {
-
-
-    }
 
     @Test
     public void get() {
+        lld = new LinkedListDeque<Integer>();
+        lld.addFirst(1);
+        lld.addFirst(2);
+        lld.addLast(2);
+        lld.addLast(4);
+        lld.removeFirst();
+        assertEquals(3, lld.size());
+        assertEquals(null, lld.get(5));
+        assertEquals(null, lld.getRecursive(5));
+        int y = lld.get(1);
+        assertEquals(2, y);
+        lld.getRecursive(1);
+        int x = lld.getRecursive(1);
+        lld.getRecursive(2);
+        int z = lld.getRecursive(2);
+        assertEquals(4, z);
+//        assertEquals(4, lld.get(2));
 
     }
 
-//    @Test
-//    public void addFirst() {
-//
-//    }
-//
-//    @Test
-//    public void addLast() {
-//
-//    }
-//
-//    @Test
-//    public void isEmpty() {
-//
-//    }
-//
-//    @Test
-//    public void removeFirst() {
-//
-//    }
-//
-//    @Test
-//    public void removeLast() {
-//
-//    }
 
 }
