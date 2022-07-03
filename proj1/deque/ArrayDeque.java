@@ -50,7 +50,9 @@ public class ArrayDeque<T> implements Deque<T> {
         }
         items[nextFirst] = item;
         size += 1;
-        /* */
+        /* if front item is at position zero, and addFirst,
+        the new front item in the deque will be the last item
+        in the array */
         if (nextFirst == 0) {
             nextFirst = items.length - 1;
         } else {
