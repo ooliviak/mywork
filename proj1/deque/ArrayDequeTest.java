@@ -38,7 +38,6 @@ public class ArrayDequeTest {
         ad = new ArrayDeque<Integer>();
         assertTrue("A newly initialized LLDeque should be empty", ad.isEmpty());
 
-
     }
 
     /** Adds an item, removes an item, and ensures that dll is empty afterwards. */
@@ -71,7 +70,6 @@ public class ArrayDequeTest {
         int x = ad.get(0);
         assertEquals(2, x);
 
-
         ad = new ArrayDeque<Integer>();
         ad.addFirst(1);
         ad.addFirst(2);
@@ -83,6 +81,27 @@ public class ArrayDequeTest {
         ad.removeLast();
         int z = ad.get(0);
         assertEquals(4, z);
+
+        ad = new ArrayDeque<Integer>();
+        ad.addLast(0);
+        ad.removeLast();
+        ad.addLast(2);
+        ad.removeLast();
+        ad.addLast(4);
+        ad.removeLast();
+        ad.addLast(6);
+
+        ad = new ArrayDeque<Integer>();
+        ad.addLast(0);
+        ad.addLast(1);
+        ad.addLast(2);
+        ad.addLast(3);
+        ad.addLast(4);
+        ad.addLast(5);
+        ad.addLast(6);
+        ad.addLast(7);
+        ad.addLast(8);
+
 
 
     }
