@@ -49,32 +49,44 @@ public class LinkedListDeque<T> implements Deque<T> {
         size = 0;
     }
 
+
     @Override
     public void addFirst(T item) {
-        size++;
-        sentinel.next = new ListNode(sentinel, item, sentinel.next);
-        /* If addFirst happens for the first time,
-        * sentinel.next is going to point to the first item. */
+        /* If addFirst happens, sentinel.next is going to point to the first item. */
         /* Sentinel.next.next.prev which is the sentinel's prev would point to the first item. */
         /* Prev should point the sentinel. */
         /* It would be sentinel -> item -> sentinel.next
         * It would be sentinel -> sentinel.next -> sentinel.next.next. */
         /* Its prev should now point to new added one instead of sentinel. */
-        sentinel.next.next.prev = sentinel.next;
+        if (size == 0) {
+            sentinel.next = new ListNode(sentinel, item, sentinel.next);
+            sentinel.prev = sentinel.next;
+        } else {
+            sentinel.next = new ListNode(sentinel, item, sentinel.next);
+            sentinel.next.next.prev = sentinel.next;
+        }
+        size++;
+
     }
 
     @Override
     public void addLast(T item) {
-        size += 1;
         /* Sentinel prev should point to newly added last item. */
         /* New last item next should point to sentinel. */
         /* Before this function was called, sentinel prev was
         pointing to the "last" item which now should become a prev item after this. */
-        sentinel.prev = new ListNode(sentinel.prev, item, sentinel);
         /* Need to connect prev and the last item
         * Because only last item prev is pointing to prev and next is pointing.
         * To sentinel, last item prev's next isn't pointing to the last item. */
-        sentinel.prev.prev.next = sentinel.prev;
+        if (size == 0) {
+            sentinel.next = new ListNode(sentinel, item, sentinel.next);
+            sentinel.prev = sentinel.next;
+        } else {
+            sentinel.prev = new ListNode(sentinel.prev, item, sentinel);
+            sentinel.prev.prev.next = sentinel.prev;
+        }
+        size += 1;
+
     }
 
     @Override
@@ -105,8 +117,8 @@ public class LinkedListDeque<T> implements Deque<T> {
             ListNode p = sentinel.next;
             /* Item's prev after the first one should point to sentinel. */
             /* Sentinel.next should point to second one. */
-            sentinel.next.next.prev = sentinel;
             sentinel.next = sentinel.next.next;
+            sentinel.next.prev = sentinel;
             return p.item;
         }
     }
@@ -120,11 +132,12 @@ public class LinkedListDeque<T> implements Deque<T> {
         } else {
             size -= 1;
             ListNode q = sentinel.prev;
+            ListNode p = sentinel.prev;
             /* The second last item's next should point to sentinel. */
             /* Sentinel.prev always points to the second last one.
             * Because last one gets removed. */
-            sentinel.prev = sentinel.prev.prev;
-            sentinel.prev.prev.next = sentinel;
+            p.prev.next = sentinel;
+            p = sentinel.prev.prev;
             return q.item;
         }
     }
