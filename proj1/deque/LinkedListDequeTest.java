@@ -178,6 +178,11 @@ public class LinkedListDequeTest {
         assertTrue("List should equal itself.", lld2.equals(lld2));
         assertTrue("lld should equal lld2.", lld.equals(lld2));
         assertTrue("lld2 should equal lld.", lld2.equals(lld));
+
+        Deque<Integer> lld3 = new LinkedListDeque<Integer>();
+        lld3.addFirst(1);
+        assertFalse("lld should not equal lld3.", lld.equals(lld3));
+
     }
 
 
