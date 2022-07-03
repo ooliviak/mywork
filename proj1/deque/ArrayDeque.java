@@ -89,11 +89,13 @@ public class ArrayDeque<T> implements Deque<T> {
     @Override
     public T removeLast() {
         /*  Removes and returns the item at the back of the deque. */
-        /* previous nextLast item */
         if (size == 0) {
             return null;
         } else {
+            /* return previous nextLast item */
             size -= 1;
+            /* if nextLast is now 0, it means that prev nextLast was 7
+            (if it's length was 8) */
             if (nextLast == 0) {
                 nextLast = items.length - 1;
             } else {
