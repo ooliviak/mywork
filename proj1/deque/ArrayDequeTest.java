@@ -168,4 +168,25 @@ public class ArrayDequeTest {
 
     }
 
+    @Test
+    public void equals() {
+        ad = new ArrayDeque<Integer>();
+        ad.addFirst(1);
+        ad.addFirst(2);
+
+        Deque<Integer> ad2 = new ArrayDeque<Integer>();
+        ad2.addFirst(1);
+        ad2.addFirst(2);
+
+        assertTrue("List should equal itself.", ad.equals(ad));
+        assertTrue("List should equal itself.", ad2.equals(ad2));
+        assertTrue("ad should equal ad2.", ad.equals(ad2));
+        assertTrue("ad2 should equal ad.", ad2.equals(ad));
+
+        Deque<Integer> ad3 = new ArrayDeque<Integer>();
+        ad3.addFirst(1);
+        assertFalse("ad should not equal ad3.", ad.equals(ad3));
+
+
+    }
 }
