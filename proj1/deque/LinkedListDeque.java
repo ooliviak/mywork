@@ -24,6 +24,7 @@ public class LinkedListDeque<T> implements Deque<T> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         T otherList = (T) o;
+//        T otherList = ((Deque<T>) o);
         if (size != ((LinkedListDeque<T>)otherList).size) return false;
 
         ListNode l1 = sentinel.next;
