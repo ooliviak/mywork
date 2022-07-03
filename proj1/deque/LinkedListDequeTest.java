@@ -95,6 +95,13 @@ public class LinkedListDequeTest {
     @Test
     public void printDeque() {
         lld = new LinkedListDeque<Integer>();
+        lld.addFirst(1);
+        lld.addFirst(2);
+        lld.addFirst(2);
+        lld.removeFirst();
+        lld.printDeque();
+
+
     }
     @Test
 //    public static Deque<String> lld2 = new LinkedListDeque<String>();
@@ -119,12 +126,8 @@ public class LinkedListDequeTest {
         lld3.addFirst(1.0);
         lld3.addFirst(2.0);
         lld3.removeLast();
-        Double z = lld3.get(1);
-        assertEquals(null, z);
-        Double a = lld3.get(0);
-        assertEquals(Optional.of(2.0), a);
-
-//        assertTrue("lld should be empty", lld3.isEmpty());
+        lld3.removeLast();
+        assertTrue("lld3 should be empty", lld3.isEmpty());
 
     }
     /** Make sure that removing from an empty LinkedListDeque returns null */
@@ -132,8 +135,7 @@ public class LinkedListDequeTest {
     public void emptyNullReturn() {
         lld = new LinkedListDeque<Integer>();
         lld.removeFirst();
-        assertEquals(null, lld);
-//        assertNull("it should return null", lld);
+        assertNull("it should return null", lld.removeFirst());
 
 
     }
@@ -161,6 +163,7 @@ public class LinkedListDequeTest {
         assertEquals(4, z);
 
     }
+
 
 
 }
