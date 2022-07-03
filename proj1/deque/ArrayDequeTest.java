@@ -68,17 +68,22 @@ public class ArrayDequeTest {
         ad = new ArrayDeque<Integer>();
         ad.addFirst(1);
         ad.addFirst(2);
-        ad.removeFirst();
-        int y = ad.get(0);
-        assertEquals(1, y);
+        int x = ad.get(0);
+        assertEquals(2, x);
 
-//        this won't work
-//        lld = new ArrayDeque<Integer>();
-//        lld.addFirst(1);
-//        lld.addFirst(2);
-//        lld.removeLast();
-//        int y = lld.get(0);
-//        assertEquals(2, y);
+
+        ad = new ArrayDeque<Integer>();
+        ad.addFirst(1);
+        ad.addFirst(2);
+        ad.addLast(3);
+        ad.addFirst(4);
+        ad.removeLast();
+        ad.addLast(5);
+        ad.addLast(6);
+        ad.removeLast();
+        int z = ad.get(0);
+        assertEquals(4, z);
+
 
     }
     /** Make sure that removing from an empty LinkedListDeque does nothing */
@@ -94,11 +99,13 @@ public class ArrayDequeTest {
     @Test
     public void printDeque() {
         ad = new ArrayDeque<Integer>();
+        ad.addFirst(1);
+        ad.addFirst(2);
+        ad.addFirst(2);
+        ad.removeFirst();
+        ad.printDeque();
     }
     @Test
-//    public static Deque<String> lld2 = new LinkedListDeque<String>();
-//    public static Deque<Double> lld3 = new LinkedListDeque<Integer>();
-
     public void multipleParamsTest() {
 
         Deque<String> ad2 = new ArrayDeque<String>();
@@ -119,12 +126,6 @@ public class ArrayDequeTest {
         ad3.addFirst(1.0);
         ad3.addFirst(2.0);
         ad3.removeLast();
-//        Double z = ad3.get(1);
-//        assertEquals(null, z);
-//        Double a = ad3.get(0);
-//        assertEquals(Optional.of(2.0), a);
-
-//        assertTrue("lld should be empty", lld3.isEmpty());
 
     }
     /** Make sure that removing from an empty LinkedListDeque returns null */
@@ -134,8 +135,7 @@ public class ArrayDequeTest {
         ad = new ArrayDeque<Integer>();
         ad.removeFirst();
         assertEquals(0, ad.size());
-        assertEquals(null, ad);
-//        assertNull("it should return null", lld);
+        assertNull("it should return null", ad.removeFirst());
 
 
     }
