@@ -33,20 +33,20 @@ public class ArrayDeque<T> implements Deque<T> {
         return true;
     }
 
-
-
     /* Source - proj1 tip slide. */
     private void resize(int capacity) {
         /* Capacity = size + 1. */
         T[] newarr = (T[]) new Object[capacity];
         System.arraycopy(items, 0, newarr, 0, size);
         items = newarr;
+        nextFirst = 0;
+        nextLast = size;
     }
 
     @Override
     public void addFirst(T item) {
         if (size == items.length) {
-            resize(size + 1);
+            resize(size * 2);
         }
         items[nextFirst] = item;
         size += 1;
@@ -64,7 +64,7 @@ public class ArrayDeque<T> implements Deque<T> {
     @Override
     public void addLast(T item) {
         if (size == items.length) {
-            resize(size + 1);
+            resize(size * 2);
         }
         items[nextLast] = item;
         size += 1;
