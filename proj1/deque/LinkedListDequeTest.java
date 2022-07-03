@@ -164,6 +164,21 @@ public class LinkedListDequeTest {
 
     }
 
+    @Test
+    public void equals() {
+        lld = new LinkedListDeque<Integer>();
+        lld.addFirst(1);
+        lld.addFirst(2);
+
+        Deque<Integer> lld2 = new LinkedListDeque<Integer>();
+        lld2.addFirst(1);
+        lld2.addFirst(2);
+
+        assertTrue("List should equal itself.", lld.equals(lld));
+        assertTrue("List should equal itself.", lld2.equals(lld2));
+        assertTrue("lld should equal lld2.", lld.equals(lld2));
+        assertTrue("lld2 should equal lld.", lld2.equals(lld));
+    }
 
 
 }
