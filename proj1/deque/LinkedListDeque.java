@@ -171,6 +171,7 @@ public class LinkedListDeque<T> implements Deque<T> {
 
     /* recursive helper function */
     private T getRecur(ListNode p, int i, int index) {
+        /* sentinel.next --> */
         if (i == index) {
             return p.item;
         } else {
