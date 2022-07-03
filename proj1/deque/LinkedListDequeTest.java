@@ -151,15 +151,14 @@ public class LinkedListDequeTest {
         lld.removeFirst();
         assertEquals(3, lld.size());
         assertEquals(null, lld.get(5));
-        assertEquals(null, lld.getRecursive(5));
+        assertEquals(null, ((LinkedListDeque<Integer>)lld).getRecursive(5));
         int y = lld.get(1);
         assertEquals(2, y);
-        lld.getRecursive(1);
-        int x = lld.getRecursive(1);
-        lld.getRecursive(2);
-        int z = lld.getRecursive(2);
+        ((LinkedListDeque<Integer>)lld).getRecursive(1);
+        int x = ((LinkedListDeque<Integer>)lld).getRecursive(1);
+        ((LinkedListDeque<Integer>)lld).getRecursive(2);
+        int z = ((LinkedListDeque<Integer>)lld).getRecursive(2);
         assertEquals(4, z);
-//        assertEquals(4, lld.get(2));
 
     }
 
