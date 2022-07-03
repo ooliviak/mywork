@@ -73,16 +73,6 @@ public class LinkedListDequeTest {
         int y = lld.get(0);
         assertEquals(1, y);
 
-//        this won't work
-//        lld = new LinkedListDeque<Integer>();
-//        lld.addFirst(1);
-//        lld.removeFirst();
-//        lld.addFirst(3);
-//        lld.addLast(4);
-//        lld.removeLast();
-//        lld.removeFirst();
-//        assertEquals(Optional.of(3), lld.removeFirst());
-
         lld = new LinkedListDeque<Integer>();
         lld.addFirst(0);
         lld.addLast(1);
@@ -95,8 +85,6 @@ public class LinkedListDequeTest {
         lld.removeLast();
         lld.addFirst(9);
         lld.removeLast();
-//        this won't return 5 instead it returns 6
-
 
     }
     /** Make sure that removing from an empty LinkedListDeque does nothing */
