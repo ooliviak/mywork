@@ -1,5 +1,7 @@
 package deque;
 
+import java.util.List;
+
 public class LinkedListDeque<T> implements Deque<T> {
 
     private class ListNode {
@@ -36,9 +38,11 @@ public class LinkedListDeque<T> implements Deque<T> {
     public void addFirst(T item) {
         size++;
         sentinel.next = new ListNode(sentinel, item, sentinel.next);
+        /* if addFirst happens for the first time,
+        * sentinel.next is going to point to the first item */
+        /* sentinel.next.next.prev which is the sentinel's prev would point to the first item*/
         /* prev should point the sentinel */
-        /* if addFirst happens second time,
-        * it would be sentinel -> item -> sentinel.next
+        /* it would be sentinel -> item -> sentinel.next
         * it would be sentinel -> sentinel.next -> sentinel.next.next*/
         /* its prev should now point to new added one instead of sentinel*/
         sentinel.next.next.prev = sentinel.next;
@@ -65,7 +69,12 @@ public class LinkedListDeque<T> implements Deque<T> {
 
     @Override
     public void printDeque() {
-
+        ListNode p = sentinel.next;
+        for (int i = 0; i < (size - 1); i++) {
+            System.out.print(p.item + " ");
+            p = p.next;
+        }
+        System.out.println();
 
     }
 
@@ -73,12 +82,7 @@ public class LinkedListDeque<T> implements Deque<T> {
     public T removeFirst() {
         /*  Removes and returns the item at the front of the deque. */
         /* if an empty list */
-        if (sentinel.next == sentinel) {
-            return null;
-        } else if (size == 1) {
-            size -= 1;
-            sentinel.next = sentinel;
-            sentinel.prev = sentinel;
+        if (isEmpty()) {
             return null;
         } else {
             size -= 1;
@@ -96,12 +100,7 @@ public class LinkedListDeque<T> implements Deque<T> {
     public T removeLast() {
         /*  Removes and returns the item at the back of the deque. */
         /* if an empty list */
-        if (sentinel.next == sentinel) {
-            return null;
-        } else if (size == 1) {
-            size -= 1;
-            sentinel.next = sentinel;
-            sentinel.prev = sentinel;
+        if (isEmpty()) {
             return null;
         } else {
             size -= 1;
