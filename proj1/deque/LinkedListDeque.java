@@ -98,7 +98,11 @@ public class LinkedListDeque<T> implements Deque<T> {
     public void printDeque() {
         ListNode p = sentinel.next;
         for (int i = 0; i < (size - 1); i++) {
-            System.out.print(p.item + " ");
+            if (i == (size - 1)) {
+                System.out.print(p.item);
+            } else {
+                System.out.print(p.item + " ");
+            }
             p = p.next;
         }
         System.out.println();
@@ -132,12 +136,11 @@ public class LinkedListDeque<T> implements Deque<T> {
         } else {
             size -= 1;
             ListNode q = sentinel.prev;
-            ListNode p = sentinel.prev;
             /* The second last item's next should point to sentinel. */
             /* Sentinel.prev always points to the second last one.
             * Because last one gets removed. */
-            p.prev.next = sentinel;
-            p = sentinel.prev.prev;
+            sentinel.prev.prev.next = sentinel;
+            sentinel.prev= sentinel.prev.prev;
             return q.item;
         }
     }
