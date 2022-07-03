@@ -79,11 +79,14 @@ public class ArrayDeque<T> implements Deque<T> {
 
     @Override
     public void printDeque() {
-        for (int i = 0; i < items.length; i++) {
-            System.out.print(items[i] + " ");
+        for (int i = 0; i < (items.length - 1); i++) {
+            if (i == (items.length - 1)) {
+                System.out.print(items[i]);
+            } else {
+                System.out.print(items[i] + " ");
+            }
         }
         System.out.println();
-
     }
 
     @Override
