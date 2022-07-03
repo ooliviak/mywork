@@ -8,7 +8,7 @@ public class ArrayDeque<T> implements Deque<T> {
     private int nextFirst;
     private double ratio;
 
-    /* starting size -> 8 */
+    /* Starting size -> 8. */
     public ArrayDeque() {
         items = (T[]) new Object[8];
         size = 0;
@@ -35,9 +35,9 @@ public class ArrayDeque<T> implements Deque<T> {
 
 
 
-    /* source - proj1 tip slide */
+    /* Source - proj1 tip slide. */
     private void resize(int capacity) {
-        /* capacity = size + 1 */
+        /* Capacity = size + 1. */
         T[] newarr = (T[]) new Object[capacity];
         System.arraycopy(items, 0, newarr, 0, size);
         items = newarr;
@@ -50,9 +50,9 @@ public class ArrayDeque<T> implements Deque<T> {
         }
         items[nextFirst] = item;
         size += 1;
-        /* if front item is at position zero, and addFirst,
+        /* If front item is at position zero, and addFirst,
         the new front item in the deque will be the last item
-        in the array */
+        in the array. */
         if (nextFirst == 0) {
             nextFirst = items.length - 1;
         } else {
@@ -68,7 +68,7 @@ public class ArrayDeque<T> implements Deque<T> {
         }
         items[nextLast] = item;
         size += 1;
-        /* so that if nextLast reaches end, it would point to 0 */
+        /* So that if nextLast reaches end, it would point to 0. */
         nextLast = (nextLast + 1) % items.length;
     }
 
@@ -92,9 +92,9 @@ public class ArrayDeque<T> implements Deque<T> {
         if (isEmpty() ) {
             return null;
         } else {
-            /* example from slide, addFirst('f') when nextFirst = 3,
+            /* Example from slide, addFirst('f') when nextFirst = 3,
             after addFirst, nextFirst would be 2 but we need nextFirst to be 3
-            and change item to null */
+            and change item to null. */
             nextFirst = (nextFirst + 1) % items.length;
             size -= 1;
             T removedFirstitem = items[nextFirst];
@@ -114,10 +114,10 @@ public class ArrayDeque<T> implements Deque<T> {
         if (size == 0) {
             return null;
         } else {
-            /* return previous nextLast item */
+            /* Return previous nextLast item. */
             size -= 1;
-            /* if nextLast is now 0, it means that prev nextLast was 7
-            (if it's length was 8) */
+            /* If nextLast is now 0, it means that prev nextLast was 7
+            (if it's length was 8). */
             if (nextLast == 0) {
                 nextLast = items.length - 1;
             } else {
@@ -138,9 +138,9 @@ public class ArrayDeque<T> implements Deque<T> {
         if (index >= size) {
             return null;
         } else {
-            /* nextFirst + 1 would be the starting point
-            * so we want the ith index from there */
-            /* want actual index */
+            /* So nextFirst + 1 would be the starting point.
+            * So we want the ith index from there.
+            * Want actual index. */
             int actualindex = (nextFirst + 1 + index) % items.length;
             return items[actualindex];
         }
