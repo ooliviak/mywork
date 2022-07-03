@@ -4,10 +4,9 @@ public class ArrayDeque<T> implements Deque<T> {
 
     public T[] items;
     private int size;
-
-//    private int capacity;
     private int nextLast;
     private int nextFirst;
+    private int ratio;
 
     /* starting size -> 8 */
     public ArrayDeque() {
@@ -31,6 +30,7 @@ public class ArrayDeque<T> implements Deque<T> {
         }
         items[nextFirst] = item;
         size += 1;
+        /* */
         if (nextFirst == 0) {
             nextFirst = items.length - 1;
         } else {
@@ -46,7 +46,8 @@ public class ArrayDeque<T> implements Deque<T> {
         }
         items[nextLast] = item;
         size += 1;
-        nextLast = nextLast + 1;
+        /* so that if nextLast reaches end, it would point to 0 */
+        nextLast = (nextLast + 1) % items.length;
     }
 
     @Override
@@ -61,17 +62,56 @@ public class ArrayDeque<T> implements Deque<T> {
 
     @Override
     public T removeFirst() {
-        return null;
+        /*  Removes and returns the item at the front of the deque. */
+        if (isEmpty() ) {
+            return null;
+        } else {
+            /* example from slide, addFirst('f') when nextFirst = 3,
+            after addFirst, nextFirst would be 2 but we need nextFirst to be 3
+            and change item to null */
+            nextFirst = (nextFirst + 1) % items.length;
+            size -= 1;
+            T removedFirstitem = items[nextFirst];
+            items[nextFirst] = null;
+            ratio = size / items.length;
+            if (ratio < 0.25) {
+                resize(items.length / 2);
+            }
+            return removedFirstitem;
+        }
+
     }
 
     @Override
     public T removeLast() {
-        return null;
+        /*  Removes and returns the item at the back of the deque. */
+        if (size == 0) {
+            return null;
+        } else {
+            size -= 1;
+            if (nextLast == 0) {
+                nextLast = items.length - 1;
+            } else {
+                nextLast = nextLast - 1;
+            }
+            T removedLastitem = items[nextLast];
+            ratio = size / items.length;
+            if (ratio < 0.25) {
+                resize(items.length / 2);
+            }
+            return removedLastitem;
+        }
     }
 
     @Override
     public T get(int index) {
-        return null;
+        if (index >= size) {
+            return null;
+        } else {
+            /* in case there are empty spaces in array, want actual index */
+            int actualindex = (nextLast + index + 2) % 8;
+            return items[actualindex];
+        }
     }
 
 
