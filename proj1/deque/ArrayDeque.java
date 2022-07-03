@@ -15,6 +15,26 @@ public class ArrayDeque<T> implements Deque<T> {
         nextFirst = 0;
         nextLast = 1;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        T otherArray = (T) o;
+        if (size != ((ArrayDeque<T>)otherArray).size) return false;
+
+        int j = 0;
+        for (int i = 0; i < items.length; i++) {
+            if (items[i] == ((ArrayDeque<T>)otherArray).items[j]) {
+                j++;
+                return true;
+            }
+        }
+        return true;
+    }
+
+
+
     /* source - proj1 tip slide */
     private void resize(int capacity) {
         /* capacity = size + 1 */
