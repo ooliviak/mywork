@@ -6,14 +6,14 @@ public class ArrayDeque<T> implements Deque<T> {
     private int size;
     private int nextLast;
     private int nextFirst;
-    private int ratio;
+    private double ratio;
 
     /* starting size -> 8 */
     public ArrayDeque() {
         items = (T[]) new Object[8];
         size = 0;
-        nextFirst = 1;
-        nextLast = 0;
+        nextFirst = 0;
+        nextLast = 1;
     }
     /* source - proj1 tip slide */
     private void resize(int capacity) {
@@ -57,6 +57,10 @@ public class ArrayDeque<T> implements Deque<T> {
 
     @Override
     public void printDeque() {
+        for (int i = 0; i < items.length; i++) {
+            System.out.print(items[i] + " ");
+        }
+        System.out.println();
 
     }
 
@@ -73,7 +77,7 @@ public class ArrayDeque<T> implements Deque<T> {
             size -= 1;
             T removedFirstitem = items[nextFirst];
             items[nextFirst] = null;
-            ratio = size / items.length;
+            ratio = (double) size / items.length;
             if (ratio < 0.25) {
                 resize(items.length / 2);
             }
@@ -85,6 +89,7 @@ public class ArrayDeque<T> implements Deque<T> {
     @Override
     public T removeLast() {
         /*  Removes and returns the item at the back of the deque. */
+        /* previous nextLast item */
         if (size == 0) {
             return null;
         } else {
@@ -95,7 +100,8 @@ public class ArrayDeque<T> implements Deque<T> {
                 nextLast = nextLast - 1;
             }
             T removedLastitem = items[nextLast];
-            ratio = size / items.length;
+            items[nextLast] = null;
+            ratio = (double) size / items.length;
             if (ratio < 0.25) {
                 resize(items.length / 2);
             }
@@ -108,8 +114,10 @@ public class ArrayDeque<T> implements Deque<T> {
         if (index >= size) {
             return null;
         } else {
-            /* in case there are empty spaces in array, want actual index */
-            int actualindex = (nextLast + index + 2) % 8;
+            /* nextFirst + 1 would be the starting point
+            * so we want the ith index from there */
+            /* want actual index */
+            int actualindex = (nextFirst + 1 + index) % items.length;
             return items[actualindex];
         }
     }
