@@ -14,9 +14,31 @@ public class LinkedListDeque<T> implements Deque<T> {
             this.next = next;
         }
     }
+
     /* The first item (if it exists) is at sentinel.next. */
     private ListNode sentinel;
     private int size;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        T otherList = (T) o;
+        if (size != ((LinkedListDeque<T>)otherList).size) return false;
+
+        ListNode l1 = sentinel.next;
+        ListNode l2 = ((LinkedListDeque<T>)otherList).sentinel.next;
+
+        while (l1 != sentinel && l2 != ((LinkedListDeque<T>)otherList).sentinel) {
+            if (!l1.item.equals(l2.item)) return false;
+            l1 = l1.next;
+            l2 = l2.next;
+        }
+        if (l1 != sentinel || l2 != ((LinkedListDeque<T>)otherList).sentinel) {
+            return false;
+        }
+        return true;
+    }
 
     /* empty list */
     public LinkedListDeque() {
