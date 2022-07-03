@@ -40,47 +40,40 @@ public class LinkedListDeque<T> implements Deque<T> {
         return true;
     }
 
-    /* empty list */
+    /* Empty list. */
     public LinkedListDeque() {
-//        sentinel = new ListNode(null,7, null);
+        /* Sentinel = new ListNode(null,7, null). */
         sentinel = new ListNode(null, null, null);
         sentinel.prev = sentinel;
         sentinel.next = sentinel;
         size = 0;
     }
 
-//    public LinkedListDeque(T item) {
-//        sentinel = new ListNode(null, null, null);
-//        sentinel.next = new ListNode(sentinel, item, sentinel);
-//        sentinel.next.next = sentinel;
-//        sentinel.next.prev = sentinel;
-//        size = 1;
-//    }
     @Override
     public void addFirst(T item) {
         size++;
         sentinel.next = new ListNode(sentinel, item, sentinel.next);
-        /* if addFirst happens for the first time,
-        * sentinel.next is going to point to the first item */
-        /* sentinel.next.next.prev which is the sentinel's prev would point to the first item*/
-        /* prev should point the sentinel */
-        /* it would be sentinel -> item -> sentinel.next
-        * it would be sentinel -> sentinel.next -> sentinel.next.next*/
-        /* its prev should now point to new added one instead of sentinel*/
+        /* If addFirst happens for the first time,
+        * sentinel.next is going to point to the first item. */
+        /* Sentinel.next.next.prev which is the sentinel's prev would point to the first item. */
+        /* Prev should point the sentinel. */
+        /* It would be sentinel -> item -> sentinel.next
+        * It would be sentinel -> sentinel.next -> sentinel.next.next. */
+        /* Its prev should now point to new added one instead of sentinel. */
         sentinel.next.next.prev = sentinel.next;
     }
 
     @Override
     public void addLast(T item) {
         size += 1;
-        /* sentinel prev should point to newly added last item */
-        /* new last item next should point to sentinel */
-        /* before this function was called, sentinel prev was
-        pointing to the "last" item which now should become a prev item after this*/
+        /* Sentinel prev should point to newly added last item. */
+        /* New last item next should point to sentinel. */
+        /* Before this function was called, sentinel prev was
+        pointing to the "last" item which now should become a prev item after this. */
         sentinel.prev = new ListNode(sentinel.prev, item, sentinel);
-        /* need to connect prev and the last item
-        * bc only last item prev is pointing to prev and next is pointing
-        * to sentinel, last item prev's next isn't pointing to the last item*/
+        /* Need to connect prev and the last item
+        * Because only last item prev is pointing to prev and next is pointing.
+        * To sentinel, last item prev's next isn't pointing to the last item. */
         sentinel.prev.prev.next = sentinel.prev;
     }
 
@@ -103,15 +96,15 @@ public class LinkedListDeque<T> implements Deque<T> {
     @Override
     public T removeFirst() {
         /*  Removes and returns the item at the front of the deque. */
-        /* if an empty list */
+        /* If an empty list. */
         if (isEmpty()) {
             return null;
         } else {
             size -= 1;
-            /* sentinel.next.item gets removed */
+            /* Sentinel.next.item gets removed. */
             ListNode p = sentinel.next;
-            /* item's prev after the first one should point to sentinel */
-            /* sentinel.next should point to second one */
+            /* Item's prev after the first one should point to sentinel. */
+            /* Sentinel.next should point to second one. */
             sentinel.next.next.prev = sentinel;
             sentinel.next = sentinel.next.next;
             return p.item;
@@ -120,16 +113,16 @@ public class LinkedListDeque<T> implements Deque<T> {
 
     @Override
     public T removeLast() {
-        /*  Removes and returns the item at the back of the deque. */
-        /* if an empty list */
+        /* Removes and returns the item at the back of the deque. */
+        /* If an empty list. */
         if (isEmpty()) {
             return null;
         } else {
             size -= 1;
             ListNode q = sentinel.prev;
-            /* the second last item's next should point to sentinel */
-            /* sentinel.prev always points to the second last one
-            * becuz last one gets removed */
+            /* The second last item's next should point to sentinel. */
+            /* Sentinel.prev always points to the second last one.
+            * Because last one gets removed. */
             sentinel.prev = sentinel.prev.prev;
             sentinel.prev.prev.next = sentinel;
             return q.item;
@@ -141,7 +134,7 @@ public class LinkedListDeque<T> implements Deque<T> {
         /* Gets the item at the given index, where 0 is the front,
         1 is the next item, and so forth.
         If no such item exists, returns null.
-        use iteration */
+        Use iteration */
         if (size == 0) {
             return null;
         } else if (size == 1) {
@@ -169,14 +162,13 @@ public class LinkedListDeque<T> implements Deque<T> {
         }
     }
 
-    /* recursive helper function */
+    /* Recursive helper function. */
     private T getRecur(ListNode p, int i, int index) {
-        /* sentinel.next --> */
         if (i == index) {
             return p.item;
         } else {
-            /* pass in p.next so we can get the next item */
-            return getRecur(p.next, i+1, index);
+            /* Pass in p.next so we can get the next item. */
+            return getRecur(p.next, i + 1, index);
         }
     }
 
