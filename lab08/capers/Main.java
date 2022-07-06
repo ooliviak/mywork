@@ -1,10 +1,10 @@
 package capers;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.Arrays;
 
 import static capers.Dog.DOG_FOLDER;
+import static capers.Dog.fromFile;
 
 /** Canine Capers: A Gitlet Prelude.
  * @author Sean Dooher
@@ -16,6 +16,7 @@ public class Main {
     /** Main metadata folder. */
     static final File CAPERS_FOLDER = Utils.join(CWD, ".capers");
     static final File story = Utils.join(CAPERS_FOLDER, "story");
+
     /**
      * Runs one of three commands:
      * story [text] -- Appends "text" + a newline to a story file in the
@@ -44,7 +45,7 @@ public class Main {
      *
      * @param args arguments from the command line
      */
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         if (args.length == 0) {
             exitWithError("Must have at least one argument");
         }
@@ -76,13 +77,14 @@ public class Main {
      *    - story -- file containing the current story
      *
      */
-    public static void setupPersistence() throws IOException {
+    public static void setupPersistence() {
+        if (!CAPERS_FOLDER.exists()) {
+            CAPERS_FOLDER.mkdir();
+        }
         if (!DOG_FOLDER.exists()) {
-            DOG_FOLDER.createNewFile();
-            Utils.writeContents(DOG_FOLDER, "");
+            DOG_FOLDER.mkdir();
         }
         if (!story.exists()) {
-            story.createNewFile();
             Utils.writeContents(story, "");
         }
         // FIXME
@@ -95,9 +97,12 @@ public class Main {
      */
     public static void writeStory(String[] args) {
         validateNumArgs("story", args, 2);
-        Utils.writeContents(story, args[1]);
-
-
+        if (story.exists()) {
+            Utils.readContentsAsString(story);
+            Utils.writeContents(story, args[1] + "\n");
+        } else {
+            Utils.writeContents(story, "");
+        }
         // FIXME
     }
 
@@ -110,6 +115,14 @@ public class Main {
      */
     public static void makeDog(String[] args) {
         validateNumArgs("dog", args, 4);
+        int age = Integer.parseInt(args[3]);
+        if (age <= 0) {
+            exitWithError("Invalid age");
+        } else {
+            Dog newDog = new Dog(args[1], args[2], age);
+            newDog.saveDog();
+            System.out.println(newDog.toString());
+        }
         // FIXME
     }
 
@@ -122,6 +135,12 @@ public class Main {
      */
     public static void celebrateBirthday(String[] args) {
         validateNumArgs("birthday", args, 2);
+        if (args.length != 2) {
+            exitWithError("Invalid input");
+        } else {
+            fromFile(args[1]).haveBirthday();
+            Utils.writeObject(new File(args[1]), Dog.class);
+        }
         // FIXME
     }
 
