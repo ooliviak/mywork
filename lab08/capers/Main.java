@@ -45,11 +45,11 @@ public class Main {
      *
      * @param args arguments from the command line
      */
-    public static void main(String[] args) {
+    public static void main(String[] args)  {
         if (args.length == 0) {
             exitWithError("Must have at least one argument");
         }
-        System.out.println("args: " + Arrays.toString(args));
+//        System.out.println("args: " + Arrays.toString(args));
         setupPersistence();
         switch (args[0]) {
             case "story":
@@ -78,13 +78,13 @@ public class Main {
      *
      */
     public static void setupPersistence() {
-        if (!CAPERS_FOLDER.exists()) {
+        if (!(CAPERS_FOLDER.exists())) {
             CAPERS_FOLDER.mkdir();
         }
-        if (!DOG_FOLDER.exists()) {
+        if (!(DOG_FOLDER.exists())) {
             DOG_FOLDER.mkdir();
         }
-        if (!story.exists()) {
+        if (!(story.exists())) {
             Utils.writeContents(story, "");
         }
         // FIXME
@@ -99,9 +99,12 @@ public class Main {
         validateNumArgs("story", args, 2);
         if (story.exists()) {
             Utils.readContentsAsString(story);
-            Utils.writeContents(story, args[1] + "\n");
+            Utils.writeContents(story, (args[1] + "\n"));
+            System.out.println(Utils.readContentsAsString(story));
         } else {
             Utils.writeContents(story, "");
+            Utils.writeContents(story, (args[1] + "\n"));
+            System.out.println(Utils.readContentsAsString(story));
         }
         // FIXME
     }
@@ -139,7 +142,7 @@ public class Main {
             exitWithError("Invalid input");
         } else {
             fromFile(args[1]).haveBirthday();
-            Utils.writeObject(new File(args[1]), Dog.class);
+//            Utils.writeObject(new File(args[1]), Dog.class);
         }
         // FIXME
     }
