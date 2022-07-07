@@ -6,7 +6,7 @@ import java.util.NoSuchElementException;
  * A AList is a list of integers. Like SLList, it also hides the terrible
  * truth of the nakedness within, but uses an array as it's base.
  */
-public class AList<Item> {
+public class AList<Item> implements Iterable<Item> {
 
     private Item[] items;
     private int size;
@@ -75,4 +75,22 @@ public class AList<Item> {
         return items;
     }
 
+    @Override
+    public Iterator<Item> iterator() {
+        return new AListIterator();
+    }
+
+    private class AListIterator implements Iterator<Item> {
+        private Item[] newitems = items;
+        @Override
+        public boolean hasNext() {
+            return (newitems[0] != items[size - 1]);
+        }
+        @Override
+        public Item next() {
+            Item ans = newitems[0];
+            newitems[0] = newitems[1];
+            return ans;
+        }
+    }
 }
