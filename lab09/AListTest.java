@@ -1,4 +1,7 @@
 import org.junit.Test;
+
+import java.util.Iterator;
+
 import static org.junit.Assert.*;
 
 public class AListTest {
@@ -14,5 +17,16 @@ public class AListTest {
             count += i;
         }
         assertEquals(6, count);
+
+//
+//        AList friends = AList.of(5, 23, 42);
+//        Iterator<Integer> seer = friends.iterator();
+//        while (seer.hasNext()) {
+//            int x = seer.next();
+//            System.out.println(x);
+
     }
+
+
+
 }
