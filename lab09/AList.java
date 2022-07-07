@@ -82,14 +82,16 @@ public class AList<Item> implements Iterable<Item> {
 
     private class AListIterator implements Iterator<Item> {
         private Item[] newitems = items;
+        int i = 1;
         @Override
         public boolean hasNext() {
-            return (newitems[0] != items[size - 1]);
+            return (newitems[0] != items[size + 1]);
         }
         @Override
         public Item next() {
             Item ans = newitems[0];
-            newitems[0] = newitems[1];
+            newitems[0] = items[i];
+            i++;
             return ans;
         }
     }
