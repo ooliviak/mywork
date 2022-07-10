@@ -24,6 +24,14 @@ public class Repository {
     public static final File CWD = new File(System.getProperty("user.dir"));
     /** The .gitlet directory. */
     public static final File GITLET_DIR = join(CWD, ".gitlet");
+    /* the staging area directory */
+    public static final File STAGING_DIR = join(GITLET_DIR, "stagingArea");
+    /* the commit directory */
+    public static final File COMMIT_DIR = join(GITLET_DIR, "commits");
+    /* the blob directory */
+    public static final File BLOB_DIR = join(GITLET_DIR, "blobs");
+    /* the branch directory */
+    public static final File BRANCH_DIR = join(GITLET_DIR, "branches");
 
     /* TODO: fill in the rest of this class. */
 }
