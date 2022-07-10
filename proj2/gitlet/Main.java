@@ -1,5 +1,7 @@
 package gitlet;
 
+import static java.lang.System.exit;
+
 /** Driver class for Gitlet, a subset of the Git version-control system.
  *  @author TODO
  */
@@ -11,14 +13,14 @@ public class Main {
     public static void main(String[] args) {
         if (args.length == 0) {
             System.out.println("Please enter a command.");
-            System.exit();
+            exit(0);
 
         }
         // TODO: what if args is empty?
         String firstArg = args[0];
         switch(firstArg) {
             case "init":
-                // TODO: handle the `init` command
+                Repository.init();
                 break;
             case "add":
                 // TODO: handle the `add [filename]` command
@@ -47,7 +49,7 @@ public class Main {
                 break;
             default:
                 System.out.println("No command with that name exists.");
-                System.exit();
+                exit(0);
         }
     }
 }

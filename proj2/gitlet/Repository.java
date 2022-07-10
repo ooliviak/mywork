@@ -34,4 +34,25 @@ public class Repository {
     public static final File BRANCH_DIR = join(GITLET_DIR, "branches");
 
     /* TODO: fill in the rest of this class. */
+
+    /* init method */
+    public static void init() {
+        if (GITLET_DIR.exists()){
+            System.out.println("A Gitlet version-control system already exists in the current directory.");
+        } else {
+            GITLET_DIR.mkdir();
+            STAGING_DIR.mkdir();
+            COMMIT_DIR.mkdir();
+            BLOB_DIR.mkdir();
+            BRANCH_DIR.mkdir();
+            // need initial commit, head pointer, commit id
+            Commit commitZero = new Commit();
+
+        }
+
+    }
+
+
+
+
 }
