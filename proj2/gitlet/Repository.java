@@ -38,17 +38,24 @@ public class Repository {
     /* init method */
     public static void init() {
         if (GITLET_DIR.exists()){
-            System.out.println("A Gitlet version-control system already exists in the current directory.");
+            System.out.println("A Gitlet version-control system already " +
+                    "exists in the current directory.");
         } else {
             GITLET_DIR.mkdir();
             STAGING_DIR.mkdir();
             COMMIT_DIR.mkdir();
             BLOB_DIR.mkdir();
             BRANCH_DIR.mkdir();
+
             // need initial commit, head pointer, commit id
             Commit commitZero = new Commit();
-
+            // main pointer, head pointer
+            Branch main = new Branch(commitZero);
+            String commitZeroId = commitZero.shaId();
         }
+    }
+
+    public static void add(String fileName) {
 
     }
 

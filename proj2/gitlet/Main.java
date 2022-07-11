@@ -23,7 +23,7 @@ public class Main {
                 Repository.init();
                 break;
             case "add":
-                // TODO: handle the `add [filename]` command
+                Repository.add(args[0]);
                 break;
             case "commit":
                 break;
