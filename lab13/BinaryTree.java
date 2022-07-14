@@ -1,3 +1,5 @@
+import com.sun.source.tree.Tree;
+
 public class BinaryTree<T> {
 
     TreeNode<T> root;
@@ -17,7 +19,13 @@ public class BinaryTree<T> {
     /* Returns the height of the tree. */
     public int height() {
         // TODO: YOUR CODE HERE
-        return 0;
+        int height = 0;
+        if (root == null) {
+            return height;
+        } else {
+            return root.heightHelper();
+
+        }
     }
 
     /* Returns true if the tree's left and right children are the same height
@@ -65,6 +73,7 @@ public class BinaryTree<T> {
         System.out.println(description + " in inorder");
         t.printInorder();
         System.out.println();
+        System.out.println(t.height());
     }
 
     /* Fills this BinaryTree with values a, b, and c. DO NOT MODIFY. */
@@ -98,13 +107,19 @@ public class BinaryTree<T> {
         t = new BinaryTree();
         print(t, "the empty tree");
         t.sampleTree1();
+        t.getRoot();
+
         print(t, "sample tree 1");
+
+
         t.sampleTree2();
+
         print(t, "sample tree 2");
         t.sampleTree3();
         print(t, "sample tree 3");
         t.sampleTree4();
         print(t, "sample tree 4");
+
     }
 
     /* Note: this class is public in this lab for testing purposes. However,
@@ -170,6 +185,28 @@ public class BinaryTree<T> {
             if (right != null) {
                 right.printInorder();
             }
+        }
+
+        public int heightHelper() {
+
+            if (left == null && right == null){
+                return 1;
+            } else if (left == null) {
+                return 1 + right.heightHelper();
+            } else if (right == null) {
+                return 1 + left.heightHelper();
+            } else {
+                return Math.max(left.heightHelper(), right.heightHelper()) + 1;
+            }
+
+        }
+
+        // either one
+        static public int heightHelper(TreeNode node) {
+            if (node == null) {
+                return 0;
+            }
+            return Math.max(heightHelper(node.left), heightHelper(node.right)) + 1;
         }
 
         // TODO: ADD HELPER METHODS HERE
