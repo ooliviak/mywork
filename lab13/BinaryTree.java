@@ -1,5 +1,3 @@
-import com.sun.source.tree.Tree;
-
 public class BinaryTree<T> {
 
     TreeNode<T> root;
@@ -37,9 +35,28 @@ public class BinaryTree<T> {
 
     /* Returns a BinaryTree representing the Fibonacci calculation for N. */
     public static BinaryTree<Integer> fibTree(int N) {
+//        BinaryTree<Integer> result = new BinaryTree<Integer>();
+//        return null;
         BinaryTree<Integer> result = new BinaryTree<Integer>();
-        return null;
+        result.fibTreeHelper(N);
+        return result;
     }
+
+    private TreeNode fibTreeHelper(int N) {
+        if (N == 0) {
+            return new TreeNode(0);
+        } else if (N == 1) {
+            return new TreeNode(1);
+        } else {
+//            int rootNum = fibTreeHelper(n-1).item + fibTreeHelper(n-2).item;
+            TreeNode left = fibTreeHelper(N-1);
+            TreeNode right = fibTreeHelper(N-2);
+            int rootNum = (int) left.item +  (int) right.item;
+            return new TreeNode(rootNum, left, right);
+        }
+
+    }
+
 
     /* Print the values in the tree in preorder: root value first, then values
        in the left subtree (in preorder), then values in the right subtree
@@ -107,18 +124,16 @@ public class BinaryTree<T> {
         t = new BinaryTree();
         print(t, "the empty tree");
         t.sampleTree1();
-        t.getRoot();
-
         print(t, "sample tree 1");
-
-
         t.sampleTree2();
-
         print(t, "sample tree 2");
         t.sampleTree3();
         print(t, "sample tree 3");
         t.sampleTree4();
         print(t, "sample tree 4");
+
+
+
 
     }
 
@@ -202,7 +217,7 @@ public class BinaryTree<T> {
         }
 
         // either one
-        static public int heightHelper(TreeNode node) {
+         public static int heightHelper(TreeNode node) {
             if (node == null) {
                 return 0;
             }
