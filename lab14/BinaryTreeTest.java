@@ -9,9 +9,15 @@ public class BinaryTreeTest {
         BinarySearchTree<String> x = new BinarySearchTree<String>();
         x.add("C");
         x.add("A");
+        x.add("A");
         x.add("E");
         x.add("B");
         x.add("D");
+
+        x.contains("C");
+        assertTrue(x.contains("C"));
+        assertFalse(x.contains("F"));
+
         final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         PrintStream oldOut = System.out;
         System.setOut(new PrintStream(outContent));
