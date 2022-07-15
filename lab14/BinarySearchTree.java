@@ -1,3 +1,5 @@
+import com.sun.source.tree.Tree;
+
 public class BinarySearchTree<T extends Comparable<T>> extends BinaryTree<T> {
 
     /* Creates an empty BST. Super() calls the constructor for BinaryTree (not in scope). */
@@ -13,12 +15,44 @@ public class BinarySearchTree<T extends Comparable<T>> extends BinaryTree<T> {
     /* Returns true if the BST contains the given KEY. */
     public boolean contains(T key) {
         // TODO: YOUR CODE HERE
-        return false;
+        if (root == null) {
+            return false;
+        } else {
+            return containsHelper(root, key);
+        }
     }
 
+    public boolean containsHelper(TreeNode t, T key) {
+        if (t == null) {
+            return false;
+        } else if (key.compareTo(t.item) == 0) {
+            return true;
+        } else if (key.compareTo(t.item) < 0) {
+            return containsHelper(t.left, key);
+        } else {
+            return containsHelper(t.right, key);
+        }
+    }
     /* Adds a node for KEY iff KEY isn't in the BST already. */
     public void add(T key) {
         // TODO: YOUR CODE HERE
+        if (contains(key) == false) {
+            root = addHelper(root, key);
+        }
+    }
+
+    private TreeNode addHelper(TreeNode t, T key) {
+        if (t == null) {
+            t = new TreeNode(key);
+        } else {
+            if (key.compareTo(t.item) < 0) {
+                t.left = addHelper(t.left, key);
+            } else {
+                t.right = addHelper(t.right, key);
+            }
+        }
+        return t;
+
     }
 
     /* Deletes a node from the BST. 
