@@ -79,7 +79,7 @@ public class RedBlackTree<T extends Comparable<T>> {
             return null;
         } else if (node.left == null) {
             return node;
-        } else if ((node.left == null && node.right == null)) {
+        } else if (node.left == null && node.right == null) {
             return node;
         } else {
             RBTreeNode newRight = new RBTreeNode(node.left.isBlack, node.item, node.left.right, node.right);
@@ -97,7 +97,7 @@ public class RedBlackTree<T extends Comparable<T>> {
             return null;
         } else if (node.right == null) {
             return node;
-        } else if ((node.left == null && node.right == null)) {
+        } else if (node.left == null && node.right == null) {
             return node;
         } else {
             RBTreeNode newLeft = new RBTreeNode(node.right.isBlack, node.item, node.left, node.right.left);
@@ -132,7 +132,7 @@ public class RedBlackTree<T extends Comparable<T>> {
 
         // handle "middle of three" and "right-leaning red" structures
         if (!isRed(node.left) && isRed(node.right)) {
-            node = rotateLeft(node.left);
+            node = rotateLeft(node);
         }
 
         // handle "smallest of three" structure
