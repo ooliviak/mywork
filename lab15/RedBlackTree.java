@@ -61,6 +61,11 @@ public class RedBlackTree<T extends Comparable<T>> {
        and right children. */
     void flipColors(RBTreeNode<T> node) {
         // TODO: YOUR CODE HERE
+        node.isBlack = !node.isBlack;
+        node.right.isBlack = !node.right.isBlack;
+        node.left.isBlack = !node.left.isBlack;
+
+
     }
 
     /* Rotates the given node NODE to the right. Returns the new root node of
@@ -119,13 +124,23 @@ public class RedBlackTree<T extends Comparable<T>> {
         }
 
         // handle "middle of three" and "right-leaning red" structures
+        if (isRed(node.left) && isRed(node.left.right)) {
+            node = rotateLeft(node.left);
+        }
 
         // handle "smallest of three" structure
+        if (isRed(node.left.left) && isRed(node.left)) {
+            node = rotateRight(node);
+        }
         
         // handle "largest of three" structure
+        if (isRed(node.right) && isRed(node.left)) {
+            flipColors(node);
+        }
         
         // TODO: YOUR CODE HERE
-        return null; //fix this return statement
+//        return null; //fix this return statement
+        return node;
     }
 
     /* Returns whether the given node NODE is red. Null nodes (children of leaf
