@@ -77,6 +77,8 @@ public class RedBlackTree<T extends Comparable<T>> {
         // TODO: YOUR CODE HERE
         if (node == null) {
             return null;
+        } else if (node.left == null) {
+            return node;
         } else if ((node.left == null && node.right == null)) {
             return node;
         } else {
@@ -93,6 +95,8 @@ public class RedBlackTree<T extends Comparable<T>> {
         // TODO: YOUR CODE HERE
         if (node == null) {
             return null;
+        } else if (node.right == null) {
+            return node;
         } else if ((node.left == null && node.right == null)) {
             return node;
         } else {
@@ -127,7 +131,7 @@ public class RedBlackTree<T extends Comparable<T>> {
         }
 
         // handle "middle of three" and "right-leaning red" structures
-        if (isRed(node.left) && isRed(node.left.right)) {
+        if (!isRed(node.left) && isRed(node.right)) {
             node = rotateLeft(node.left);
         }
 
