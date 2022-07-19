@@ -44,16 +44,18 @@ public class RedBlackTree<T extends Comparable<T>> {
         if (r == null) {
             return null;
         }
-
         if (r.getItemCount() == 1) {
             // TODO: Replace with code to create a 2-node equivalent
-            r = new RBTreeNode(true, r.item, r.getItemAt(0), r.getChildAt(1));
-
-//            return (RBTreeNode<T>) r;
-//            return null;
+            RBTreeNode newRb = new RBTreeNode(true, r.getItemAt(0),
+                    buildRedBlackTree(r.getChildAt(0)), buildRedBlackTree(r.getChildAt(1)));
+            return newRb;
         } else {
             // TODO: Replace with code to create a 3-node equivalent
-            return null;
+            // left node - red
+            RBTreeNode newRb = new RBTreeNode(true, r.getItemAt(0),
+                    buildRedBlackTree(r.getChildAt(0)), new RBTreeNode(false, r.getItemAt(1),
+                    buildRedBlackTree(r.getChildAt(1)), buildRedBlackTree(r.getChildAt(2))));
+            return newRb;
         }
     }
 
@@ -61,6 +63,7 @@ public class RedBlackTree<T extends Comparable<T>> {
        and right children. */
     void flipColors(RBTreeNode<T> node) {
         // TODO: YOUR CODE HERE
+        // opposite
         node.isBlack = !node.isBlack;
         node.right.isBlack = !node.right.isBlack;
         node.left.isBlack = !node.left.isBlack;
@@ -137,7 +140,7 @@ public class RedBlackTree<T extends Comparable<T>> {
         if (isRed(node.right) && isRed(node.left)) {
             flipColors(node);
         }
-        
+
         // TODO: YOUR CODE HERE
 //        return null; //fix this return statement
         return node;
