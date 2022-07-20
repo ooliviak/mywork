@@ -45,8 +45,10 @@ public class MyTrieSet implements TrieSet61BL {
             for (int i = 0; i < key.length(); i++) {
                 if (node.charTree.containsKey(key.charAt(i))) {
                     node = node.charTree.get(key.charAt(i));
+                    node.exists = true;
                 } else {
                     node.exists = false;
+                    break;
                 }
             }
             return node.exists;
@@ -62,13 +64,12 @@ public class MyTrieSet implements TrieSet61BL {
                 // check if this character is already in hashmap
                 if (node.charTree.containsKey(key.charAt(i))) {
                     node = node.charTree.get(key.charAt(i));
-                    node.exists = true;
                 } else {
                     node.charTree.put(key.charAt(i), new TreeNode(key.charAt(i), false));
                     node = node.charTree.get(key.charAt(i));
-                    node.exists = true;
                 }
             }
+            node.exists = true;
         }
     }
 
@@ -80,7 +81,7 @@ public class MyTrieSet implements TrieSet61BL {
 
     @Override
     public String longestPrefixOf(String key) {
-        throw new UnsupportedOperationException("");
+        throw new UnsupportedOperationException();
     }
 
 
