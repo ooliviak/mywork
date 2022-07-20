@@ -12,13 +12,15 @@ public class TestMyTrieSet {
     
     //Write your own test for add! Do this before running the other tests.
     @Test
-    public void addTest() {
+    public void basicAddTest() {
         MyTrieSet t = new MyTrieSet();
         t.add("hi");
         t.add("hit");
         t.add("hit");
         t.add("hello");
         t.add("cat");
+        t.add("");
+        t.add(" ");
         System.out.println(t.contains("hit"));
     }
 

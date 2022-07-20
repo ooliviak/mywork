@@ -58,6 +58,8 @@ public class MyTrieSet implements TrieSet61BL {
     public void add(String key) {
         if (key == null) {
             return;
+        } else if (key.length() == 0) {
+            return;
         } else {
             TreeNode node = root;
             for (int i = 0; i < key.length(); i++) {
@@ -75,8 +77,17 @@ public class MyTrieSet implements TrieSet61BL {
 
     @Override
     public List<String> keysWithPrefix(String prefix) {
+
         List<String> keys = new LinkedList<String>();
-        return null;
+        TreeNode node = root;
+        for (int i = 0; i < prefix.length(); i ++) {
+            if (!node.charTree.containsKey(prefix.charAt(i))) {
+                return keys;
+            } else {
+                node = node.charTree.get(prefix.charAt(i));
+            }
+        }
+        return keys;
     }
 
     @Override
