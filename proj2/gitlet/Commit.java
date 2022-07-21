@@ -44,6 +44,11 @@ public class Commit {
         this.trackedFile = new HashMap<String, String>();
     }
 
+    public Commit(String msg) {
+        this.message = msg;
+        this.id = shaId();
+        this.file = Utils.join(Repository.COMMIT_DIR, this.id);
+    }
     /* SHA1 id for commit */
     public String shaId() {
         return Utils.sha1(this.message);

@@ -2,6 +2,7 @@ package gitlet;
 
 import java.io.File;
 import static gitlet.Utils.*;
+import static java.lang.System.exit;
 
 // TODO: any imports you need here
 
@@ -56,6 +57,19 @@ public class Repository {
     }
 
     public static void add(String fileName) {
+        File file = Utils.join(Repository.STAGING_DIR, fileName);
+        if (file.exists()) {
+            Utils.writeContents(file, (Utils.readContentsAsString(file)));
+            // check if the contents of the file changed, if so put it in staging area
+
+        } else {
+            System.out.println("File does not exist.");
+            exit(0);
+        }
+
+    }
+
+    public static void commit(String msg) {
 
     }
 

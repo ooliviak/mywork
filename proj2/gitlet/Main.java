@@ -23,9 +23,10 @@ public class Main {
                 Repository.init();
                 break;
             case "add":
-                Repository.add(args[0]);
+                Repository.add(args[1]);
                 break;
             case "commit":
+                Repository.commit(args[1]);
                 break;
             case "rm":
                 break;
