@@ -1,16 +1,14 @@
 package gitlet;
 
-// TODO: any imports you need here
-
 import java.io.File;
 import java.util.Date;
 import java.util.HashMap;
 
 /** Represents a gitlet commit object.
- *  TODO: It's a good idea to give a description here of what else this Class
+ *
  *  does at a high level.
  *
- *  @author TODO
+ *  @author Olivia Kim
  */
 public class Commit {
     /**
@@ -31,7 +29,7 @@ public class Commit {
     private HashMap<String, String> trackedFile;
 
 
-    /* TODO: fill in the rest of this class. */
+
     public Commit() {
         this.message = "initial commit";
         /*  00:00:00 UTC, Thursday, 1 January 1970 */

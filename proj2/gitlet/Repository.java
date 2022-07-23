@@ -4,7 +4,7 @@ import java.io.File;
 import static gitlet.Utils.*;
 import static java.lang.System.exit;
 
-// TODO: any imports you need here
+
 
 /** Represents a gitlet repository.
  *  TODO: It's a good idea to give a description here of what else this Class
@@ -14,7 +14,7 @@ import static java.lang.System.exit;
  */
 public class Repository {
     /**
-     * TODO: add instance variables here.
+     *
      *
      * List all instance variables of the Repository class here with a useful
      * comment above them describing what that variable represents and how that
@@ -34,13 +34,11 @@ public class Repository {
     /* the branch directory */
     public static final File BRANCH_DIR = join(GITLET_DIR, "branches");
 
-    /* TODO: fill in the rest of this class. */
 
     /* init method */
     public static void init() {
-        if (GITLET_DIR.exists()){
-            System.out.println("A Gitlet version-control system already " +
-                    "exists in the current directory.");
+        if (GITLET_DIR.exists()) {
+            System.out.println("A Gitlet version-control system already exists in the current directory.");
         } else {
             GITLET_DIR.mkdir();
             STAGING_DIR.mkdir();
@@ -48,9 +46,7 @@ public class Repository {
             BLOB_DIR.mkdir();
             BRANCH_DIR.mkdir();
 
-            // need initial commit, head pointer, commit id
             Commit commitZero = new Commit();
-            // main pointer, head pointer
             Branch main = new Branch(commitZero);
             String commitZeroId = commitZero.shaId();
         }
@@ -60,7 +56,8 @@ public class Repository {
         File file = Utils.join(Repository.STAGING_DIR, fileName);
         if (file.exists()) {
             Utils.writeContents(file, (Utils.readContentsAsString(file)));
-            // check if the contents of the file changed, if so put it in staging area
+            /** check if the contents of the file changed,
+             * if so put it in staging area **/
 
         } else {
             System.out.println("File does not exist.");

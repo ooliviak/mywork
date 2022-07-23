@@ -3,7 +3,7 @@ package gitlet;
 import static java.lang.System.exit;
 
 /** Driver class for Gitlet, a subset of the Git version-control system.
- *  @author TODO
+ *  @author Olivia Kim
  */
 public class Main {
 
@@ -16,9 +16,8 @@ public class Main {
             exit(0);
 
         }
-        // TODO: what if args is empty?
         String firstArg = args[0];
-        switch(firstArg) {
+        switch (firstArg) {
             case "init":
                 Repository.init();
                 break;
