@@ -95,12 +95,10 @@ public class HashMap<K, V> implements Map61BL<K, V> {
     private void resize() {
         HashMap<K, V> resized = new HashMap<>(2 * arr.length);
         for (int i = 0; i < arr.length; i++) {
-            resized.put((K) arr[i].key, (V) arr[i].value);
+            resized.put((K) arr[i].key, get((K) arr[i].key));
         }
         initialCapacity = resized.size;
         this.arr = resized.arr;
-
-
     }
 
     @Override
@@ -143,7 +141,6 @@ public class HashMap<K, V> implements Map61BL<K, V> {
         int hashNum = hash((String) key);
         if (list.key.equals(key)) {
             size --;
-            list.value = null;
             list = null;
             arr[hashNum] = list;
             return true;
