@@ -7,10 +7,10 @@ import static java.lang.System.exit;
 
 
 /** Represents a gitlet repository.
- *  TODO: It's a good idea to give a description here of what else this Class
+ *
  *  does at a high level.
  *
- *  @author TODO
+ *  @author Olivia Kim
  */
 public class Repository {
     /**
@@ -38,7 +38,8 @@ public class Repository {
     /* init method */
     public static void init() {
         if (GITLET_DIR.exists()) {
-            System.out.println("A Gitlet version-control system already exists in the current directory.");
+            System.out.println("A Gitlet version-control system already"
+                    + " exists in the current directory.");
         } else {
             GITLET_DIR.mkdir();
             STAGING_DIR.mkdir();
