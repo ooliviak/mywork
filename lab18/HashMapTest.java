@@ -27,7 +27,9 @@ public class HashMapTest {
     public void testClear() {
         HashMap<String, String> h = new HashMap<String, String>();
         h.put("claire", "ko");
+        h.containsKey("claire");
         assertTrue(h.containsKey("claire"));
+        h.get("claire");
         assertEquals("ko", h.get("claire"));
         assertEquals(1, h.size());
         h.put("matt", "pancakes");
@@ -70,8 +72,19 @@ public class HashMapTest {
         assertEquals("claire", h.get("alex"));
         assertEquals(1, h.size());
         h.remove("alex");
+        h.containsKey("alex");
         assertFalse(h.containsKey("alex"));
         assertEquals(0, h.size());
+
+        h.put("anna", "john");
+        h.put("alex", "claire");
+        h.put("dean", "luke");
+        assertTrue(h.containsKey("anna"));
+        assertEquals("john", h.get("anna"));
+        h.remove("anna", "john");
+        assertTrue(h.containsKey("alex"));
+        assertFalse(h.containsKey("anna"));
+
     }
 
     @Test
@@ -80,6 +93,7 @@ public class HashMapTest {
         assertEquals(2, h.capacity());
         h.put("connor", "grace");
         h.put("zoe", "matt");
+        h.capacity();
         assertEquals(4, h.capacity());
 
         h = new HashMap<String, String>(10, 1);
