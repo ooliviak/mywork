@@ -197,18 +197,7 @@ public class MinHeap<E extends Comparable<E>> {
         } else {
             throw new NoSuchElementException();
         }
-//        for (int i = 1; i < contents.size(); i++) {
-//            if (getElement(i).equals(element)) {
-//                E prev = getElement(i);
-//                setElement(i, element);
-//                if (prev.compareTo(getElement(i)) > 0) {
-//                    bubbleUp(i);
-//                } else {
-//                    bubbleDown(i);
-//                }
-//            }
-//        }
-//        throw new NoSuchElementException();
+
     }
 
     /* Returns true if ELEMENT is contained in the MinHeap. Item equality should
