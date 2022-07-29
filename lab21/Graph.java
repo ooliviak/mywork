@@ -188,30 +188,36 @@ public class Graph implements Iterable<Integer> {
         if (!pathExists(start, stop)) {
             return pathLst;
         } else {
-            pathLst.add(start);
-            for (Edge edge : adjLists[start]) {
-                if (edge.to == stop) {
-                    pathLst.add(edge.to);
-                } else {
-                    visited.add(edge.to);
-                }
-            }
-
-//            while (iter.hasNext()) {
-//                int v = iter.next();
-//                if (v == stop) {
-//                    visited.add(v);
-//                    break;
-//                }
-//                visited.add(v);
-//                for (int i = 0; i < adjLists.length; i++) {
-//                    if (isAdjacent(visited.get(i), v)) {
-//                        pathLst.add(i);
-//                    }
+//            pathLst.add(start);
+//            for (Edge edge : adjLists[start]) {
+//                if (edge.to == stop) {
+//                    pathLst.add(edge.to);
+//                } else {
+//                    visited.add(edge.to);
 //                }
 //            }
-            return pathLst;
+            pathLst.add(start);
+            int i = 0;
+            while (iter.hasNext()) {
+                int v = iter.next();
+                visited.add(v);
+                if (v == stop) {
+                    pathLst.add(stop);
+                    break;
+                }
+                if (visited.get(i) != start) {
+                    if (isAdjacent(visited.get(i), stop)) {
+                        pathLst.add(visited.get(i));
+                        pathLst.add(stop);
+                        break;
+                    }
+                }
+                i++;
+
+
+            }
         }
+        return pathLst;
     }
 
     public List<Integer> topologicalSort() {
