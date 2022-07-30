@@ -264,13 +264,12 @@ public class Graph implements Iterable<Integer> {
         int[] distTo = new int[vertexCount];
         int[] edgeTo = new int[vertexCount];
 
-        for (int i = 0; i < vertexCount; i++) {
-            distTo[i] = inf;
-            PQ.add(new PriorityItem(i, inf));
-        }
-
-        PQ.add(new PriorityItem(start, 0));
-        distTo[start] = 0;
+//        for (int i = 0; i < vertexCount; i++) {
+//            distTo[i] = inf;
+//        }
+//
+//        PQ.add(new PriorityItem(start, 0));
+//        distTo[start] = 0;
 
 //        while (visited.size() < vertexCount) {
 //            int curr = PQ.poll().item;
@@ -299,15 +298,15 @@ public class Graph implements Iterable<Integer> {
 
 
 
-//        for (int k = 0; k < vertexCount; k++) {
-//            if (k == start) {
-//                PQ.add(new PriorityItem(start, 0));
-//                distTo[k] = 0;
-//            } else {
-//                PQ.add(new PriorityItem(k, inf));
-//                distTo[k] = inf;
-//            }
-//        }
+        for (int k = 0; k < vertexCount; k++) {
+            if (k == start) {
+                PQ.add(new PriorityItem(start, 0));
+                distTo[k] = 0;
+            } else {
+                PQ.add(new PriorityItem(k, inf));
+                distTo[k] = inf;
+            }
+        }
         pathLst.add(start);
         while (!PQ.isEmpty()) {
             int curr = PQ.poll().item;
@@ -320,7 +319,10 @@ public class Graph implements Iterable<Integer> {
                     if (distTo[curr] + w < distTo[q]) {
                         distTo[q] = distTo[curr] + w;
                         edgeTo[q] = curr;
-                        pathLst.add(edgeTo[q]);
+                        if (curr == stop) {
+                            pathLst.add(curr);
+                            break;
+                        }
                         int num = distTo[q];
                         PQ.remove(q);
                         PQ.add(new PriorityItem(q, num));
@@ -328,6 +330,15 @@ public class Graph implements Iterable<Integer> {
                 }
             }
         }
+
+//        if (distTo[curr] + w < distTo[q]) {
+//            distTo[q] = distTo[curr] + w;
+//            edgeTo[q] = curr;
+//            pathLst.add(edgeTo[q]);
+//            int num = distTo[q];
+//            PQ.remove(q);
+//            PQ.add(new PriorityItem(q, num));
+//        }
         return pathLst;
     }
 
