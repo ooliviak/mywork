@@ -310,10 +310,12 @@ public class Graph implements Iterable<Integer> {
                     break;
                 }
                 pathLst.add(edgeTo[i]);
-                i = edgeTo[i];
-                if (edgeTo[i] == 0) {
+                int j = edgeTo[i];
+                if (edgeTo[j] == 0) {
                     break;
                 } else {
+                    pathLst.remove(1);
+                    pathLst.add(1, edgeTo[j]);
                     pathLst.add(edgeTo[i]);
                 }
                 break;
