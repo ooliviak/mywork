@@ -264,40 +264,6 @@ public class Graph implements Iterable<Integer> {
         int[] distTo = new int[vertexCount];
         int[] edgeTo = new int[vertexCount];
 
-//        for (int i = 0; i < vertexCount; i++) {
-//            distTo[i] = inf;
-//        }
-//
-//        PQ.add(new PriorityItem(start, 0));
-//        distTo[start] = 0;
-
-//        while (visited.size() < vertexCount) {
-//            int curr = PQ.poll().item;
-//            visited.add(curr);
-//            for (int q : neighbors(curr)) {
-//                if (!visited.contains(q)) {
-//                    int w = getEdge(curr, q).weight;
-//                    if (distTo[curr] + w < distTo[q]) {
-//                        distTo[q] = distTo[curr] + w;
-//                        edgeTo[q] = curr;
-//                        PQ.add(new PriorityItem(q, distTo[q]));
-//                    }
-//                }
-//                else {
-//                    int w = getEdge(curr, q).weight;
-//                    if (distTo[curr] + w < distTo[q]) {
-//                        distTo[q] = distTo[curr] + w;
-//                        edgeTo[q] = curr;
-//                    }
-//                }
-//                pathLst.add(getEdge(curr, q).from);
-//            }
-//
-//        }
-
-
-
-
         for (int k = 0; k < vertexCount; k++) {
             if (k == start) {
                 PQ.add(new PriorityItem(start, 0));
@@ -307,40 +273,58 @@ public class Graph implements Iterable<Integer> {
                 distTo[k] = inf;
             }
         }
-        pathLst.add(start);
         while (!PQ.isEmpty()) {
             int curr = PQ.poll().item;
-            if (curr == stop) {
-                pathLst.add(curr);
-                break;
-            } else {
+            if (!visited.contains(curr)) {
+                visited.add(curr);
                 for (int q : neighbors(curr)) {
                     int w = getEdge(curr, q).weight;
-                    if (distTo[curr] + w < distTo[q]) {
-                        distTo[q] = distTo[curr] + w;
-                        edgeTo[q] = curr;
-                        if (curr == stop) {
-                            pathLst.add(curr);
-                            break;
+                    if (!visited.contains(q)) {
+                        if (distTo[curr] + w < distTo[q]) {
+                            distTo[q] = distTo[curr] + w;
+                            edgeTo[q] = curr;
+                            int num = distTo[q];
+                            PQ.remove(new PriorityItem(q, distTo[q]));
+                            PQ.add(new PriorityItem(q, num));
                         }
-                        int num = distTo[q];
-                        PQ.remove(q);
-                        PQ.add(new PriorityItem(q, num));
                     }
                 }
             }
         }
 
-//        if (distTo[curr] + w < distTo[q]) {
-//            distTo[q] = distTo[curr] + w;
-//            edgeTo[q] = curr;
-//            pathLst.add(edgeTo[q]);
-//            int num = distTo[q];
-//            PQ.remove(q);
-//            PQ.add(new PriorityItem(q, num));
+        pathLst.add(start);
+       int i = 0;
+//        for (int i = 0; i < vertexCount; i++) {
+//            int j = i;
+//            if (j == stop) {
+//                if (edgeTo[j] == start) {
+//                    break;
+//                }
+//                i = edgeTo[j];
+//            }
+//
 //        }
+        while (i < vertexCount) {
+            if (i == stop) {
+                if (edgeTo[i] == start) {
+                    break;
+                }
+                pathLst.add(edgeTo[i]);
+                i = edgeTo[i];
+                if (edgeTo[i] == 0) {
+                    break;
+                } else {
+                    pathLst.add(edgeTo[i]);
+                }
+                break;
+            } else {
+                i++;
+            }
+        }
+        pathLst.add(stop);
         return pathLst;
     }
+
 
     public Edge getEdge(int u, int v) {
         if (isAdjacent(u, v)) {
