@@ -45,6 +45,8 @@ public class UnionFind {
             throw new IllegalArgumentException();
         } else if (id[v] < 0) {
             return v;
+        } else if (id[id[v]] < 0) {
+            return id[v];
         } else {
             while (id[root] >= 0) {
                 root = id[root];
@@ -72,15 +74,17 @@ public class UnionFind {
         } else {
             int root1 = find(v1);
             int root2 = find(v2);
-            if (sizeOf(root1) == sizeOf(root2)) {
+            int size1 = sizeOf(root1);
+            int size2 = sizeOf(root2);
+            if (size1 == size2) {
                 id[root1] = root2;
-                id[root2] = -1 * (sizeOf(root1) + sizeOf(root2));
-            } else if (sizeOf(root1) < sizeOf(root2)) {
+                id[root2] = -1 * (size1 + size2);
+            } else if (size1 < size2) {
                 id[root1] = root2;
-                id[root2] = -1 * (sizeOf(root1) + sizeOf(root2));
+                id[root2] = -1 * (size1 + size2);
             } else {
                 id[root2] = root1;
-                id[root1] = -1 * (sizeOf(root1) + sizeOf(root2));
+                id[root1] = -1 * (size1 + size2);
             }
         }
     }
