@@ -38,18 +38,24 @@ public class UnionFind {
        allowing for fast search-time. If invalid items are passed into this
        function, throw an IllegalArgumentException. */
     public int find(int v) {
-        int parent;
+        int root = v;
+        int temp;
         // TODO: YOUR CODE HERE
         if (v < 0 || v >= id.length) {
             throw new IllegalArgumentException();
         } else if (id[v] < 0) {
             return v;
-        } else if (id[v] == 0) {
-            return 0;
         } else {
-            parent = find(id[v]);
-            id[v] = parent;
-            return parent;
+            while (id[root] >= 0) {
+                root = id[root];
+            }
+            // make it become a direct child of the root
+            while (id[v] >= 0) {
+                temp = id[v];
+                id[v] = root;
+                v = temp;
+            }
+            return root;
         }
     }
 
@@ -59,18 +65,23 @@ public class UnionFind {
        root to V2's root. Union-ing a item with itself or items that are
        already connected should not change the structure. */
     public void union(int v1, int v2) {
-        // TODO: YOUR CODE HERE
-        int root1 = find(v1);
-        int root2 = find(v2);
-        if (sizeOf(root1) == sizeOf(root2)) {
-            id[root1] = root2;
-            id[root2] = -1 * (sizeOf(root1) + sizeOf(root2));
-        } else if (sizeOf(root1) < sizeOf(root2)) {
-            id[root1] = root2;
-            id[root2] = -1 * (sizeOf(root1) + sizeOf(root2));
-        } else {
-            id[root2] = root1;
-            id[root1] = -1 * (sizeOf(root1) + sizeOf(root2));
+        if (connected(v1, v2)) {
+            return;
+        }
+        else {
+            int root1 = find(v1);
+            int root2 = find(v2);
+            if (sizeOf(root1) == sizeOf(root2)) {
+                id[root1] = root2;
+                id[root2] = -1 * (sizeOf(root1) + sizeOf(root2));
+            } else if (sizeOf(root1) < sizeOf(root2)) {
+                id[root1] = root2;
+                id[root2] = -1 * (sizeOf(root1) + sizeOf(root2));
+            } else {
+                id[root2] = root1;
+                id[root1] = -1 * (sizeOf(root1) + sizeOf(root2));
+            }
         }
     }
+
 }
