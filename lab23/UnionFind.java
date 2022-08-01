@@ -67,8 +67,9 @@ public class UnionFind {
     public void union(int v1, int v2) {
         if (connected(v1, v2)) {
             return;
-        }
-        else {
+        } else if (v1 == v2) {
+            return;
+        } else {
             int root1 = find(v1);
             int root2 = find(v2);
             if (sizeOf(root1) == sizeOf(root2)) {
