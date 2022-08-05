@@ -52,27 +52,36 @@ public class DistributionSorts {
         int[] count = new int[10];
         int range = 10;
         int[] sorted = new int[arr.length];
-//        int val = 1;
+        int num = 0;
+
         if (digit == 0) {
-            for (int i = 0; i < arr.length; i++) {
-                int num = (arr[i] / 1) % range;
-                count[num] ++;
-            }
+            digit = digit + 1;
         } else {
-            digit = (1/digit) * 10;
-            for (int i = 0; i < arr.length; i++) {
-                int num = (arr[i] / digit) % range;
-                count[num] ++;
+            int temp = digit;
+            double x = (double) 1 / digit;
+            digit = (int) (digit * x);
+            int c = 0;
+            while (c < temp) {
+                digit = digit * 10;
+                c++;
             }
         }
 
-        int k = 0;
-        for (int i = 0; i < count.length; i++) {
-            for (int j = 0; j < count[i]; j++) {
-                sorted[k] = i;
-                k++;
-            }
+        for (int i = 0; i < arr.length; i++) {
+            num = (arr[i] / digit) % range;
+            count[num] ++;
         }
+
+        for (int i = 1; i < range; i++) {
+            count[i] = count[i] + count[i-1];
+        }
+
+        for (int i = arr.length - 1; i >= 0; i--) {
+            num = (arr[i] / digit) % range;
+            sorted[count[num] - 1] = arr[i];
+            count[num]--;
+        }
+
         System.arraycopy(sorted, 0, arr, 0, arr.length);
 
     }
