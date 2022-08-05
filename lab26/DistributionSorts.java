@@ -6,6 +6,34 @@ public class DistributionSorts {
        only 0, 1, ..., 9. */
     public static void countingSort(int[] arr) {
         // TODO: YOUR CODE HERE
+        int[] count = new int[10];
+        int[] starts = new int[10];
+
+        for (int i = 0; i < arr.length; i++) {
+            count[arr[i]] ++;
+        }
+
+//        for (int i = 0; i < count.length; i++) {
+//            starts[i] = count[i];
+//        }
+//
+//        for (int i = 0; i < count.length; i++) {
+//            if (i == 0) {
+//                starts[i] = 0;
+//            } else if (i == 1) {
+//                starts[i] = count[0];
+//            } else {
+//                starts[i] = count[i-1] + starts[i-1];
+//            }
+//        }
+
+        int k = 0;
+        for (int i = 0; i < count.length; i++) {
+            for (int j = 0; j < count[i]; j++) {
+                arr[k] = i;
+                k++;
+            }
+        }
     }
 
     /* Destructively sorts ARR using LSD radix sort. */
@@ -21,6 +49,32 @@ public class DistributionSorts {
        rightmost digit of each number. */
     private static void countingSortOnDigit(int[] arr, int digit) {
         // TODO: YOUR CODE HERE
+        int[] count = new int[10];
+        int range = 10;
+        int[] sorted = new int[arr.length];
+//        int val = 1;
+        if (digit == 0) {
+            for (int i = 0; i < arr.length; i++) {
+                int num = (arr[i] / 1) % range;
+                count[num] ++;
+            }
+        } else {
+            digit = (1/digit) * 10;
+            for (int i = 0; i < arr.length; i++) {
+                int num = (arr[i] / digit) % range;
+                count[num] ++;
+            }
+        }
+
+        int k = 0;
+        for (int i = 0; i < count.length; i++) {
+            for (int j = 0; j < count[i]; j++) {
+                sorted[k] = i;
+                k++;
+            }
+        }
+        System.arraycopy(sorted, 0, arr, 0, arr.length);
+
     }
 
     /* Returns the largest number of digits that any integer in ARR has. */
@@ -69,8 +123,8 @@ public class DistributionSorts {
     }
 
     public static void main(String[] args) {
-        runCountingSort(20);
+//        runCountingSort(20);
         runLSDRadixSort(3);
-        runLSDRadixSort(30);
+//        runLSDRadixSort(30);
     }
 }
