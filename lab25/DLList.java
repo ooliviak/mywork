@@ -1,3 +1,5 @@
+import java.security.interfaces.RSAMultiPrimePrivateCrtKey;
+
 /* A doubly-linked list supporting various sorting algorithms. */
 public class DLList<T extends Comparable<T>> {
 
@@ -154,7 +156,23 @@ public class DLList<T extends Comparable<T>> {
         DLList<T> oneHalf = new DLList<>();
         DLList<T> otherHalf = new DLList<>();
         // TODO: YOUR CODE HERE
-        return null;
+        DLList<T> x = new DLList<>();
+        DLList<T> y = new DLList<>();
+        int count = 0;
+        Node first = this.sentinel.next;
+        while (count < (this.size/2)) {
+            oneHalf.addLast(first.item);
+            first = first.next;
+            count ++;
+        }
+        while (count < this.size) {
+            otherHalf.addLast(first.item);
+            first = first.next;
+            count ++;
+        }
+        x = oneHalf.mergeSort();
+        y = otherHalf.mergeSort();
+        return x.merge(y);
     }
 
     /* Returns the result of merging this DLList with LST. Does not modify the
@@ -192,9 +210,34 @@ public class DLList<T extends Comparable<T>> {
         // Assume first element is the divider.
         DLList<T> smallElements = new DLList<>();
         DLList<T> largeElements = new DLList<>();
+        DLList<T> same = new DLList<>();
+        DLList<T> small = new DLList<>();
+        DLList<T> big = new DLList<>();
+        DLList<T> toReturn = new DLList<>();
         T pivot = sentinel.next.item;
+        Node second = sentinel.next;
+
         // TODO: YOUR CODE HERE
-        return null;
+        while (second.item != null) {
+            if (second.item.compareTo(pivot) < 0) {
+                small.addLast(second.item);
+                second = second.next;
+            } else if (second.item.compareTo(pivot) == 0) {
+                same.addLast(second.item);
+                second = second.next;
+            } else {
+                big.addLast(second.item);
+                second = second.next;
+            }
+        }
+
+        smallElements = small.quicksort();
+        largeElements = big.quicksort();
+        toReturn.append(smallElements);
+        toReturn.append(same);
+        toReturn.append(largeElements);
+
+        return toReturn;
     }
 
     /* Appends LST to the end of this DLList. */
@@ -238,25 +281,25 @@ public class DLList<T extends Comparable<T>> {
         System.out.print("After insertion sort: ");
         System.out.println(sortedValues);
 
-//        System.out.print("Before selection sort: ");
-//        values = generateRandomIntegerDLList(10);
-//        System.out.println(values);
-//        sortedValues = values.selectionSort();
-//        System.out.print("After selection sort: ");
-//        System.out.println(sortedValues);
-//
-//        System.out.print("Before merge sort: ");
-//        values = generateRandomIntegerDLList(10);
-//        System.out.println(values);
-//        sortedValues = values.mergeSort();
-//        System.out.print("After merge sort: ");
-//        System.out.println(sortedValues);
-//
-//        System.out.print("Before quicksort: ");
-//        values = generateRandomIntegerDLList(10);
-//        System.out.println(values);
-//        sortedValues = values.quicksort();
-//        System.out.print("After quicksort: ");
-//        System.out.println(sortedValues);
+        System.out.print("Before selection sort: ");
+        values = generateRandomIntegerDLList(10);
+        System.out.println(values);
+        sortedValues = values.selectionSort();
+        System.out.print("After selection sort: ");
+        System.out.println(sortedValues);
+
+        System.out.print("Before merge sort: ");
+        values = generateRandomIntegerDLList(10);
+        System.out.println(values);
+        sortedValues = values.mergeSort();
+        System.out.print("After merge sort: ");
+        System.out.println(sortedValues);
+
+        System.out.print("Before quicksort: ");
+        values = generateRandomIntegerDLList(10);
+        System.out.println(values);
+        sortedValues = values.quicksort();
+        System.out.print("After quicksort: ");
+        System.out.println(sortedValues);
     }
 }
