@@ -83,6 +83,7 @@ public class IntListTest {
     public void testEquals() {
         IntList a = IntList.of(1, 2, 3, 4, 5);
         IntList b = IntList.of(1, 2, 3, 4, 5);
+
         assertTrue("List should equal itself.", a.equals(a));
         assertTrue("List should equal itself.", b.equals(b));
         assertTrue("a should equal b.", a.equals(b));
@@ -176,5 +177,12 @@ public class IntListTest {
         assertEquals(IntList.of(1, 2, 3, 4, 5, 6), A);
         A.item = 7;
         assertEquals(A.item, res.item);
+    }
+
+    @Test
+    public void testDswap() {
+        IntList A = IntList.of(10,3,2,11);
+        IntList.dswapUpList(A);
+
     }
 }

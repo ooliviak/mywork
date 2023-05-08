@@ -206,15 +206,25 @@ public class Graph implements Iterable<Integer> {
                     break;
                 }
                 if (visited.get(i) != start) {
-                    if (isAdjacent(visited.get(i), stop)) {
+                    pathLst.add(visited.get(i));
+                    if (!isAdjacent(visited.get(i), stop)) {
+                        if (isAdjacent(visited.get(i-1), visited.get(i))) {
+                            pathLst.add(visited.get(i-1));
+                        }
+                    } else {
                         pathLst.add(visited.get(i));
                         pathLst.add(stop);
                         break;
                     }
+
+//                    if (isAdjacent(visited.get(i), stop)) {
+//                        pathLst.add(visited.get(i));
+//                    }
+
+//                    pathLst.add(stop);
+//                    break;
                 }
                 i++;
-
-
             }
         }
         return pathLst;

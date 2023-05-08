@@ -11,7 +11,8 @@ public class Measurement {
      * inches
      */
     public Measurement() {
-
+        this.feet = 0;
+        this.inches = 0;
     }
 
     /**

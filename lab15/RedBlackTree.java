@@ -138,7 +138,7 @@ public class RedBlackTree<T extends Comparable<T>> {
 
         // handle "smallest of three" structure
         if (isRed(node.left.left) && isRed(node.left)) {
-            node = rotateRight(node);
+           node = rotateRight(node);
         }
         
         // handle "largest of three" structure

@@ -12,8 +12,8 @@ import java.util.Random;
  * Draws a world consisting of plus shaped regions.
  */
 public class PlusWorld {
-    private static final int WIDTH = 50;
-    private static final int HEIGHT = 50;
+    private static final int WIDTH = 30;
+    private static final int HEIGHT = 30;
 
     public static void addPlus(int size) {
         TERenderer ter = new TERenderer();
@@ -55,10 +55,9 @@ public class PlusWorld {
                 }
             }
         }
-
         ter.renderFrame(world);
     }
     public static void main(String[] args) {
-        addPlus(4);
+        addPlus(5);
     }
 }

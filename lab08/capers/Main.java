@@ -117,7 +117,7 @@ public class Main {
         } else {
             Dog newDog = new Dog(args[1], args[2], age);
             newDog.saveDog();
-            System.out.println(newDog.toString());
+            System.out.println(newDog);
         }
         // FIXME
     }
@@ -134,8 +134,10 @@ public class Main {
         if (args.length != 2) {
             exitWithError("Invalid input");
         } else {
-            fromFile(args[1]).haveBirthday();
-//            Utils.writeObject(new File(args[1]), Dog.class);
+//            File newFile = Utils.join(DOG_FOLDER, args[1]);
+            Dog newDog = fromFile(args[1]);
+            newDog.haveBirthday();
+            newDog.saveDog();
         }
         // FIXME
     }

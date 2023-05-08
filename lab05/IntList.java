@@ -11,6 +11,7 @@ public class IntList {
     /** The next node in this IntList. */
     public IntList next;
 
+
     /** Constructs an IntList storing ITEM and next node NEXT. */
     public IntList(int item, IntList next) {
         this.item = item;
@@ -253,4 +254,27 @@ public class IntList {
              return newlist;
          }
      }
+
+    public static IntList dswapUpList(IntList L) {
+        if (L == null || L.next == null) {
+            return L;
+        }
+        IntList holder = new IntList(0, L);
+        IntList prev;
+        prev = holder;
+        while (prev.next.next != null) {
+            IntList L0 = prev.next,
+                    L1 = L0.next;
+
+            if (L0.item > L1.item) {
+                L0.next = L1.next;
+                L1.next = L0;
+                prev.next = L1;
+                prev = L1;
+            } else {
+                prev = L0;
+            }
+        }
+        return holder.next;
+    }
 }

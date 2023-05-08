@@ -38,7 +38,7 @@ public class BinaryTree<T> {
 //        BinaryTree<Integer> result = new BinaryTree<Integer>();
 //        return null;
         BinaryTree<Integer> result = new BinaryTree<Integer>();
-        result.root =result.fibTreeHelper(N);
+        result.root = result.fibTreeHelper(N);
         return result;
     }
 
